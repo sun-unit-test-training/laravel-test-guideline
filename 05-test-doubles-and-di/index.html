@@ -1,0 +1,844 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
+    
+    
+      
+        <title>Test Doubles và DI - PHP Testing Guidelines</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6910b76c.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.196e0c26.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#test-doubles-va-di" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href=".." title="PHP Testing Guidelines" class="md-header-nav__button md-logo" aria-label="PHP Testing Guidelines">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            PHP Testing Guidelines
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Test Doubles và DI
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/sun-unit-test-training/php-testing-guideline/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="PHP Testing Guidelines" class="md-nav__button md-logo" aria-label="PHP Testing Guidelines">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    PHP Testing Guidelines
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/sun-unit-test-training/php-testing-guideline/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." class="md-nav__link">
+      Giới thiệu
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../01-why/" class="md-nav__link">
+      Viết test để làm gì?
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../02-testcase/" class="md-nav__link">
+      Cơ bản về test case
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../03-phpunit/" class="md-nav__link">
+      PHPUnit
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../04-code-coverage/" class="md-nav__link">
+      Code Coverage
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Test Doubles và DI
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      Test Doubles và DI
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#khai-niem" class="md-nav__link">
+    Khái niệm
+  </a>
+  
+    <nav class="md-nav" aria-label="Khái niệm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dummies" class="md-nav__link">
+    Dummies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fake" class="md-nav__link">
+    Fake
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stubs" class="md-nav__link">
+    Stubs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mocks" class="md-nav__link">
+    Mocks
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-co-lap" class="md-nav__link">
+    Test cô lập
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependency-injection" class="md-nav__link">
+    Dependency Injection
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mocks-vs-stubs" class="md-nav__link">
+    Mocks vs Stubs
+  </a>
+  
+    <nav class="md-nav" aria-label="Mocks vs Stubs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stubs_1" class="md-nav__link">
+    Stubs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mocks_1" class="md-nav__link">
+    Mocks
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tham-khao" class="md-nav__link">
+    Tham khảo
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../06-mutation-testing/" class="md-nav__link">
+      Mutation Testing
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../07-laravel/" class="md-nav__link">
+      Laravel
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../08-checklist/" class="md-nav__link">
+      Checklist
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../09-tdd/" class="md-nav__link">
+      TDD
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../10-references/" class="md-nav__link">
+      Tài liệu khác
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#khai-niem" class="md-nav__link">
+    Khái niệm
+  </a>
+  
+    <nav class="md-nav" aria-label="Khái niệm">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dummies" class="md-nav__link">
+    Dummies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fake" class="md-nav__link">
+    Fake
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stubs" class="md-nav__link">
+    Stubs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mocks" class="md-nav__link">
+    Mocks
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-co-lap" class="md-nav__link">
+    Test cô lập
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependency-injection" class="md-nav__link">
+    Dependency Injection
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mocks-vs-stubs" class="md-nav__link">
+    Mocks vs Stubs
+  </a>
+  
+    <nav class="md-nav" aria-label="Mocks vs Stubs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stubs_1" class="md-nav__link">
+    Stubs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mocks_1" class="md-nav__link">
+    Mocks
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tham-khao" class="md-nav__link">
+    Tham khảo
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/sun-unit-test-training/php-testing-guideline/edit/master/docs/05-test-doubles-and-di.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="test-doubles-va-di">Test Doubles và DI<a class="headerlink" href="#test-doubles-va-di" title="Permanent link">&para;</a></h1>
+<h2 id="khai-niem">Khái niệm<a class="headerlink" href="#khai-niem" title="Permanent link">&para;</a></h2>
+<p>Một trong những yêu cầu cơ bản của Unit Test đó là tính <strong>cô lập</strong> (<strong>isolation</strong>). Nhìn chung thì tính cô lập là rất khó (nếu không muốn nói là không thể) bởi luôn luôn có rất nhiều dependencies trong cả project.</p>
+<p>Vì thế, khái niệm về <code>Test Doubles</code> ra đời. Một <code>Test Double</code> cho phép chúng ta loại bỏ dependency nguyên bản, từ đó giúp cô lập unit.</p>
+<p>Dưới đây là một vài loại <code>Test Doubles</code></p>
+<p><em>Một vài phần trong các định nghĩa sau được lấy từ bài viết <a href="https://martinfowler.com/articles/mocksArentStubs.html">Mocks Aren't Stubs</a> trên blog của Martin Fowler</em></p>
+<h3 id="dummies">Dummies<a class="headerlink" href="#dummies" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Dummy là objects được truyền vào nhưng mà không hề được sử dụng. Chúng thường chỉ được dùng để hoàn thành danh sách parameter.</li>
+</ul>
+<h3 id="fake">Fake<a class="headerlink" href="#fake" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fake objects thực ra có mang những triển khai logic, thế nhưng thường sử dụng những "lối tắt", khiến chúng không thích hợp để triển khai trên production (Ví dụ như in memory database)</li>
+</ul>
+<h3 id="stubs">Stubs<a class="headerlink" href="#stubs" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Stubs đưa ra những câu trả lời có sẵn cho các lời gọi hàm được thực hiện trong quá trình test, và thường sẽ không trả về bất cứ cái gì ngoài những thứ mà chúng đã được lập trình trong bài test.</li>
+</ul>
+<h3 id="mocks">Mocks<a class="headerlink" href="#mocks" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Mocks là objects đã được lập trình trước với các expectations, tạo ra một đặc tả cho lời gọi mà chúng dự kiến sẽ nhận được.</li>
+</ul>
+<h2 id="test-co-lap">Test cô lập<a class="headerlink" href="#test-co-lap" title="Permanent link">&para;</a></h2>
+<p>Test cô lập:</p>
+<ul>
+<li>Giả lập access API / web service ngoài (mạng)</li>
+<li>Giả lập access database?</li>
+<li>Giả lập lời gọi hàm từ các class khác?</li>
+</ul>
+<p>Giả lập là gì?</p>
+<ul>
+<li>Giả lập = thay thế các object sử dụng cho production với 1 một object giúp cho việc testing</li>
+<li>Giả lập = thay thế real object với mock object</li>
+<li>Mock object bắt chước hành vi của real object, nhưng chúng ta có thể tự định nghĩa kết quả trả về theo từng kịch bản test case</li>
+</ul>
+<p>Có hai quan điểm về unit test cô lập:</p>
+<ul>
+<li><strong>Sociable test</strong>: Chỉ giả lập (mock) các dependencies gây chậm hoặc có side effects lớn hoặc không thể dùng trong test environment: database, network call...</li>
+<li><strong>Solitary test</strong>: Giả lập tất cả dependencies</li>
+</ul>
+<p><img alt="" src="../assets/images/isolate.png" /></p>
+<blockquote>
+<p><em><a href="https://martinfowler.com/bliki/UnitTest.html">https://martinfowler.com/bliki/UnitTest.html</a></em></p>
+</blockquote>
+<p>Ví dụ:
+Có 3 class <code>Order</code>, <code>Customer</code>, <code>Product</code>, với yêu cầu khi user order 1 sản phẩm, nếu ngày order trùng với ngày sinh của user thì user sẽ được giảm 20%.</p>
+<p><img alt="" src="../assets/images/sociable-solitary-test.jpg" /></p>
+<p>Class <code>Order</code> có 2 dependencies là <code>Product</code> và <code>Customer</code>, cần viết test cho method <code>Order::price()</code>:</p>
+<ul>
+<li>
+<p><strong>Sociable Test</strong>: do <code>Product::getPrice()</code> và <code>Customer::getDiscount()</code> đều không có logic phức tạp hay có khả năng làm chậm test nên sẽ không thực hiện giả lập</p>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code><span style="color: #2838b0">namespace</span> Tests\Unit<span style="color: #888888">;</span>
+
+<span style="color: #2838b0">use</span> PHPUnit\Framework\TestCase<span style="color: #888888">;</span>
+<span style="color: #2838b0">use</span> App\Customer<span style="color: #888888">;</span>
+<span style="color: #2838b0">use</span> App\Product<span style="color: #888888">;</span>
+<span style="color: #2838b0">use</span> App\Order<span style="color: #888888">;</span>
+<span style="color: #2838b0">use</span> DateTimeImmutable<span style="color: #888888">;</span>
+
+<span style="color: #2838b0">class</span> <span style="color: #287088">SociableOrderTest</span> <span style="color: #2838b0">extends</span> TestCase
+<span style="color: #888888">{</span>
+    <span style="color: #2838b0">public</span> <span style="color: #2838b0">function</span> <span style="color: #785840">test_price_return_correct_value</span><span style="color: #888888">()</span>
+    <span style="color: #888888">{</span>
+        <span style="color: #b04040">$product</span> <span style="color: #666666">=</span> <span style="color: #2838b0">new</span> Product<span style="color: #888888">(</span><span style="color: #b83838">&#39;PS4&#39;</span><span style="color: #888888">,</span> <span style="color: #444444">100</span><span style="color: #888888">);</span>
+        <span style="color: #b04040">$customer</span> <span style="color: #666666">=</span> <span style="color: #2838b0">new</span> Customer<span style="color: #888888">(</span><span style="color: #b83838">&#39;Hunter&#39;</span><span style="color: #888888">,</span> <span style="color: #2838b0">new</span> DateTimeImmutable<span style="color: #888888">(</span><span style="color: #388038">date</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;Y/m/d&#39;</span><span style="color: #888888">)));</span>
+        <span style="color: #b04040">$order</span> <span style="color: #666666">=</span> <span style="color: #2838b0">new</span> Order<span style="color: #888888">(</span><span style="color: #b04040">$customer</span><span style="color: #888888">,</span> <span style="color: #b04040">$product</span><span style="color: #888888">);</span>
+
+        <span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">assertEquals</span><span style="color: #888888">(</span><span style="color: #444444">80</span><span style="color: #888888">,</span> <span style="color: #b04040">$order</span><span style="color: #666666">-&gt;</span><span style="color: #388038">price</span><span style="color: #888888">());</span>
+    <span style="color: #888888">}</span>
+<span style="color: #888888">}</span>
+</code></pre></div>
+</li>
+<li>
+<p><strong>Solitary Test</strong>:</p>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code><span style="color: #2838b0">class</span> <span style="color: #287088">SolitaryOrderTest</span> <span style="color: #2838b0">extends</span> TestCase
+<span style="color: #888888">{</span>
+    <span style="color: #2838b0">public</span> <span style="color: #2838b0">function</span> <span style="color: #785840">test_price_return_correct_value</span><span style="color: #888888">()</span>
+    <span style="color: #888888">{</span>
+        <span style="color: #888888; font-style: italic">// Giả lập (mock) Product</span>
+        <span style="color: #b04040">$product</span> <span style="color: #666666">=</span> <span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">createMock</span><span style="color: #888888">(</span>Product<span style="color: #666666">::</span><span style="color: #388038">class</span><span style="color: #888888">);</span>
+        <span style="color: #888888; font-style: italic">// Expect $product-&gt;getPrice() được gọi 1 lần và trả về 100</span>
+        <span style="color: #b04040">$product</span><span style="color: #666666">-&gt;</span><span style="color: #388038">expects</span><span style="color: #888888">(</span><span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">once</span><span style="color: #888888">())</span>
+            <span style="color: #666666">-&gt;</span><span style="color: #388038">method</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;getPrice&#39;</span><span style="color: #888888">)</span>
+            <span style="color: #666666">-&gt;</span><span style="color: #388038">willReturn</span><span style="color: #888888">(</span><span style="color: #444444">100</span><span style="color: #888888">);</span>
+
+        <span style="color: #888888; font-style: italic">// Giả lập (mock) Customer</span>
+        <span style="color: #b04040">$customer</span> <span style="color: #666666">=</span> <span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">createMock</span><span style="color: #888888">(</span>Customer<span style="color: #666666">::</span><span style="color: #388038">class</span><span style="color: #888888">);</span>
+        <span style="color: #888888; font-style: italic">// Expect $customer-&gt;getDiscount() được gọi 1 lần và trả về 20</span>
+        <span style="color: #b04040">$customer</span><span style="color: #666666">-&gt;</span><span style="color: #388038">expects</span><span style="color: #888888">(</span><span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">once</span><span style="color: #888888">())</span>
+            <span style="color: #666666">-&gt;</span><span style="color: #388038">method</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;getDiscount&#39;</span><span style="color: #888888">)</span>
+            <span style="color: #666666">-&gt;</span><span style="color: #388038">willReturn</span><span style="color: #888888">(</span><span style="color: #444444">20</span><span style="color: #888888">);</span>
+
+        <span style="color: #b04040">$order</span> <span style="color: #666666">=</span> <span style="color: #2838b0">new</span> Order<span style="color: #888888">(</span><span style="color: #b04040">$customer</span><span style="color: #888888">,</span> <span style="color: #b04040">$product</span><span style="color: #888888">);</span>
+
+        <span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">assertEquals</span><span style="color: #888888">(</span><span style="color: #444444">80</span><span style="color: #888888">,</span> <span style="color: #b04040">$order</span><span style="color: #666666">-&gt;</span><span style="color: #388038">price</span><span style="color: #888888">());</span>
+    <span style="color: #888888">}</span>
+<span style="color: #888888">}</span>
+</code></pre></div>
+</li>
+</ul>
+<p>Vì đã được giả lập nên khi logic của <code>Product::getPrice()</code> và <code>Customer::getDiscount()</code> thay đổi thì <code>SolitaryOrderTest</code> không cần phải update lại.</p>
+<p>Vậy khi nào cần giả lập (mock), chúng ta có thể áp dụng cả 2 quan điểm:</p>
+<ul>
+<li>
+<p>Nếu code được cấu trúc tốt thì thường có 2 loại class:</p>
+<ul>
+<li>Model: nhiệm vụ chính là để lưu dữ liệu bên trong và không thực hiện nhiều logic bên trong =&gt; không cần mock, chỉ đơn giản là khởi tạo đối tượng và truyền vào fake data cho nó</li>
+<li>Service: nhiệm vụ chính là thực hiện công việc, logic =&gt; mock</li>
+</ul>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code><span style="color: #2838b0">class</span> <span style="color: #287088">OrderTest</span> <span style="color: #2838b0">extends</span> TestCase
+<span style="color: #888888">{</span>
+    <span style="color: #2838b0">public</span> <span style="color: #2838b0">function</span> <span style="color: #785840">test_price_return_correct_value</span><span style="color: #888888">()</span>
+    <span style="color: #888888">{</span>
+        <span style="color: #b04040">$product</span> <span style="color: #666666">=</span> <span style="color: #2838b0">new</span> Product<span style="color: #888888">(</span><span style="color: #b83838">&#39;PS4&#39;</span><span style="color: #888888">,</span> <span style="color: #444444">100</span><span style="color: #888888">);</span>
+
+        <span style="color: #888888; font-style: italic">// Giả lập (mock) Customer</span>
+        <span style="color: #b04040">$customer</span> <span style="color: #666666">=</span> <span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">createMock</span><span style="color: #888888">(</span>Customer<span style="color: #666666">::</span><span style="color: #388038">class</span><span style="color: #888888">);</span>
+        <span style="color: #888888; font-style: italic">// Expect $customer-&gt;getDiscount() được gọi 1 lần và trả về 20</span>
+        <span style="color: #b04040">$customer</span><span style="color: #666666">-&gt;</span><span style="color: #388038">expects</span><span style="color: #888888">(</span><span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">once</span><span style="color: #888888">())</span>
+            <span style="color: #666666">-&gt;</span><span style="color: #388038">method</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;getDiscount&#39;</span><span style="color: #888888">)</span>
+            <span style="color: #666666">-&gt;</span><span style="color: #388038">willReturn</span><span style="color: #888888">(</span><span style="color: #444444">20</span><span style="color: #888888">);</span>
+
+        <span style="color: #b04040">$order</span> <span style="color: #666666">=</span> <span style="color: #2838b0">new</span> Order<span style="color: #888888">(</span><span style="color: #b04040">$customer</span><span style="color: #888888">,</span> <span style="color: #b04040">$product</span><span style="color: #888888">);</span>
+
+        <span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">assertEquals</span><span style="color: #888888">(</span><span style="color: #444444">80</span><span style="color: #888888">,</span> <span style="color: #b04040">$order</span><span style="color: #666666">-&gt;</span><span style="color: #388038">price</span><span style="color: #888888">());</span>
+    <span style="color: #888888">}</span>
+<span style="color: #888888">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>Khi việc mock quá phức tạp hãy thực hiện refactor code hoặc thực hiện integration test</p>
+</li>
+</ul>
+<h2 id="dependency-injection">Dependency Injection<a class="headerlink" href="#dependency-injection" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Method <code>Order::price()</code> cần sử dụng <code>Product::getPrice()</code> và <code>Customer::getDiscount()</code> nên class <code>Order</code> có 2 dependencies là <code>Product</code> và <code>Customer</code></li>
+<li>Muốn giả lập thì các dependencies phải được khai báo tường minh (<em>explicit dependencies</em>), tức là được truyền vào constructor, class không có nhiệm vụ khởi tạo dependencies</li>
+<li>Nếu khởi tạo bằng <code>new</code> hoặc dùng <code>static</code> method bên trong thì không có cách nào để giả lập (thực ra thì cũng có nhưng thường dùng trick về autoloading của PHP chứ PHP không hỗ trợ kỹ thuật <em>Monkey Patching</em> (*))</li>
+</ul>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code><span style="color: #888888; font-style: italic">// Bad method</span>
+<span style="color: #2838b0">public</span> <span style="color: #2838b0">function</span> <span style="color: #785840">register</span><span style="color: #888888">(</span><span style="color: #2838b0">array</span> <span style="color: #b04040">$inputs</span><span style="color: #888888">)</span>
+<span style="color: #888888">{</span>
+    <span style="color: #888888; font-style: italic">// ...</span>
+    <span style="color: #888888">(</span><span style="color: #2838b0">new</span> MailService<span style="color: #888888">())</span><span style="color: #666666">-&gt;</span><span style="color: #388038">send</span><span style="color: #888888">(</span><span style="color: #b04040">$user</span><span style="color: #888888">);</span>
+    <span style="color: #888888; font-style: italic">// …</span>
+    MailService<span style="color: #666666">::</span><span style="color: #388038">send</span><span style="color: #888888">(</span><span style="color: #b04040">$user</span><span style="color: #888888">);</span>
+<span style="color: #888888">}</span>
+</code></pre></div>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code><span style="color: #888888; font-style: italic">// Good, using dependency injection</span>
+<span style="color: #2838b0">public</span> <span style="color: #2838b0">function</span> <span style="color: #b85820">__construct</span><span style="color: #888888">(</span>MailService <span style="color: #b04040">$mailService</span><span style="color: #888888">)</span>
+<span style="color: #888888">{</span>
+    <span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">mailService</span> <span style="color: #666666">=</span> <span style="color: #b04040">$mailService</span><span style="color: #888888">;</span>
+<span style="color: #888888">}</span>
+
+<span style="color: #2838b0">public</span> <span style="color: #2838b0">function</span> <span style="color: #785840">register</span><span style="color: #888888">(</span><span style="color: #2838b0">array</span> <span style="color: #b04040">$inputs</span><span style="color: #888888">)</span>
+<span style="color: #888888">{</span>
+    <span style="color: #b04040">$transaction</span> <span style="color: #666666">=</span> <span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">mailService</span><span style="color: #666666">-&gt;</span><span style="color: #388038">send</span><span style="color: #888888">(</span><span style="color: #b04040">$user</span><span style="color: #888888">);</span>
+<span style="color: #888888">}</span>
+</code></pre></div>
+<h2 id="mocks-vs-stubs">Mocks vs Stubs<a class="headerlink" href="#mocks-vs-stubs" title="Permanent link">&para;</a></h2>
+<p>Có nhiều loại test doubles, nhưng chỉ cần focus vào 2 loại chính</p>
+<h3 id="stubs_1">Stubs<a class="headerlink" href="#stubs_1" title="Permanent link">&para;</a></h3>
+<p>Giả lập trạng thái =&gt; loại bỏ tất cả logic bên trong method của object thật và có thể thay đổi kết quả trả về của method theo ý muốn</p>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code><span style="color: #888888; font-style: italic">// Create mock object</span>
+<span style="color: #b04040">$product</span> <span style="color: #666666">=</span> <span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">createMock</span><span style="color: #888888">(</span>Product<span style="color: #666666">::</span><span style="color: #388038">class</span><span style="color: #888888">);</span>
+<span style="color: #888888; font-style: italic">// Stub method price, make it return 100</span>
+<span style="color: #b04040">$product</span><span style="color: #666666">-&gt;</span><span style="color: #388038">method</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;getPrice&#39;</span><span style="color: #888888">)</span><span style="color: #666666">-&gt;</span><span style="color: #388038">will</span><span style="color: #888888">(</span><span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">returnValue</span><span style="color: #888888">(</span><span style="color: #444444">100</span><span style="color: #888888">));</span>
+</code></pre></div>
+<h3 id="mocks_1">Mocks<a class="headerlink" href="#mocks_1" title="Permanent link">&para;</a></h3>
+<p>Verify hành vi =&gt; khi method under test được gọi thì chúng ta <strong>expect</strong> mock method cũng được gọi, 1 lần hoặc 2 lần hoặc nhiều lần, được truyền tham số gì...</p>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code><span style="color: #2838b0">public</span> <span style="color: #2838b0">function</span> <span style="color: #785840">test_order_sends_mail_if_succeeded</span><span style="color: #888888">()</span>
+<span style="color: #888888">{</span>
+    <span style="color: #b04040">$mailService</span> <span style="color: #666666">=</span> <span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">createMock</span><span style="color: #888888">(</span>MailService<span style="color: #666666">::</span><span style="color: #388038">class</span><span style="color: #888888">);</span>
+    <span style="color: #b04040">$order</span> <span style="color: #666666">=</span> <span style="color: #2838b0">new</span> Order<span style="color: #888888">(</span><span style="color: #b83838">&#39;Wine&#39;</span><span style="color: #888888">,</span> <span style="color: #b83838">&#39;user@localhost&#39;</span><span style="color: #888888">,</span> <span style="color: #b04040">$mailService</span><span style="color: #888888">);</span>
+
+    <span style="color: #888888; font-style: italic">// Expect method MailService::send được gọi duy nhất 1 lần,</span>
+    <span style="color: #888888; font-style: italic">// với 2 tham số là &#39;user@localhost&#39; và &#39;Order succeeded!&#39;</span>
+    <span style="color: #888888; font-style: italic">// Expect cần được viết trước khi gọi method test</span>
+    <span style="color: #b04040">$mailService</span><span style="color: #666666">-&gt;</span><span style="color: #388038">expects</span><span style="color: #888888">(</span>once<span style="color: #888888">())</span>
+        <span style="color: #666666">-&gt;</span><span style="color: #388038">method</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;send&#39;</span><span style="color: #888888">);</span>
+        <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span>
+            <span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">equalTo</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;user@localhost&#39;</span><span style="color: #888888">),</span>
+            <span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">equalTo</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;Order succeeded!&#39;</span><span style="color: #888888">)</span>
+        <span style="color: #888888">);</span>
+
+    <span style="color: #b04040">$result</span> <span style="color: #666666">=</span> <span style="color: #b04040">$order</span><span style="color: #666666">-&gt;</span><span style="color: #388038">process</span><span style="color: #888888">();</span>
+
+    <span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">assertTrue</span><span style="color: #888888">(</span><span style="color: #b04040">$result</span><span style="color: #888888">);</span>
+<span style="color: #888888">}</span>
+</code></pre></div>
+<h2 id="tham-khao">Tham khảo<a class="headerlink" href="#tham-khao" title="Permanent link">&para;</a></h2>
+<p>(*)</p>
+<ul>
+<li>https://github.com/Codeception/AspectMock</li>
+<li>https://github.com/kahlan/kahlan</li>
+<li>https://github.com/infection/infection</li>
+<li>https://www.phpspec.net/en/stable/</li>
+</ul>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../04-code-coverage/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Code Coverage
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../06-mutation-testing/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Mutation Testing
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.fd16492e.min.js"></script>
+      <script src="../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,760 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
+    
+    
+      
+        <title>Checklist - PHP Testing Guidelines</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.6910b76c.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.196e0c26.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#checklist" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href=".." title="PHP Testing Guidelines" class="md-header-nav__button md-logo" aria-label="PHP Testing Guidelines">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            PHP Testing Guidelines
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              Checklist
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/sun-unit-test-training/php-testing-guideline/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="PHP Testing Guidelines" class="md-nav__button md-logo" aria-label="PHP Testing Guidelines">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    PHP Testing Guidelines
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/sun-unit-test-training/php-testing-guideline/" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href=".." class="md-nav__link">
+      Giới thiệu
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../01-why/" class="md-nav__link">
+      Viết test để làm gì?
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../02-testcase/" class="md-nav__link">
+      Cơ bản về test case
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../03-phpunit/" class="md-nav__link">
+      PHPUnit
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../04-code-coverage/" class="md-nav__link">
+      Code Coverage
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../05-test-doubles-and-di/" class="md-nav__link">
+      Test Doubles và DI
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../06-mutation-testing/" class="md-nav__link">
+      Mutation Testing
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../07-laravel/" class="md-nav__link">
+      Laravel
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Checklist
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      Checklist
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-self-describing-test-method" class="md-nav__link">
+    [1] Self-describing test method
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-a3-arrange-asset-act" class="md-nav__link">
+    [2] A3 (Arrange, Asset, Act)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-use-sematicproper-assert-method" class="md-nav__link">
+    [3] Use sematic/proper assert method
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-if-you-write-code-write-tests" class="md-nav__link">
+    [4] If you write code, write tests
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-unit-vs-integration" class="md-nav__link">
+    [5] Unit vs Integration?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-my-tests-are-fast" class="md-nav__link">
+    [6] My tests are fast!
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-quality-over-code-coverage-number" class="md-nav__link">
+    [7] Quality over code coverage number!
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pull-request-template" class="md-nav__link">
+    Pull request template
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../09-tdd/" class="md-nav__link">
+      TDD
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../10-references/" class="md-nav__link">
+      Tài liệu khác
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-self-describing-test-method" class="md-nav__link">
+    [1] Self-describing test method
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-a3-arrange-asset-act" class="md-nav__link">
+    [2] A3 (Arrange, Asset, Act)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-use-sematicproper-assert-method" class="md-nav__link">
+    [3] Use sematic/proper assert method
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-if-you-write-code-write-tests" class="md-nav__link">
+    [4] If you write code, write tests
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-unit-vs-integration" class="md-nav__link">
+    [5] Unit vs Integration?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-my-tests-are-fast" class="md-nav__link">
+    [6] My tests are fast!
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-quality-over-code-coverage-number" class="md-nav__link">
+    [7] Quality over code coverage number!
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pull-request-template" class="md-nav__link">
+    Pull request template
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/sun-unit-test-training/php-testing-guideline/edit/master/docs/08-checklist.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="checklist">Checklist<a class="headerlink" href="#checklist" title="Permanent link">&para;</a></h1>
+<h2 id="1-self-describing-test-method"><img alt="✅" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2705.svg" title=":white_check_mark:" /> [1] Self-describing test method<a class="headerlink" href="#1-self-describing-test-method" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Unit Test method names must be self-describing</p>
+<p>Also focus on naming style, keep the naming style consistent across all the test methods and tests.</p>
+</blockquote>
+<p><strong>Mục đích:</strong></p>
+<ul>
+<li>Test case là tài liệu</li>
+<li>Đọc vào tên method test có thể biết mục đích của test case</li>
+</ul>
+<p><strong>Thực hiện</strong></p>
+<ul>
+<li>Tên test method không cần phải quá ngắn gọn</li>
+<li>Tên test method phải chỉ ra điều kiện và expect của test case</li>
+<li>Thống nhất convention trong project, mặc định visibility của 1 method trong class là <code>public</code> nên có thể loại bỏ từ <code>public</code> trong method test</li>
+</ul>
+<p>Chọn một trong các convention sau:</p>
+<ol>
+<li>
+<p><strong>[Recommend]</strong> Sử dụng prefix <code>test_</code></p>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code><span style="color: #2838b0">function</span> <span style="color: #785840">test_it_returns_false_when_input_number_is_odd</span><span style="color: #888888">()</span>
+</code></pre></div>
+</li>
+<li>
+<p>Sử dụng annotation <code>@test</code> thì tên test method không cần phải bắt đầu bằng <code>test_</code></p>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code><span style="color: #888888; font-style: italic">/* @test */</span>
+<span style="color: #2838b0">function</span> <span style="color: #785840">it_returns_false_when_input_number_is_odd</span><span style="color: #888888">()</span>
+</code></pre></div>
+</li>
+<li>
+<p>Sử dụng <code>camelCase</code> thay cho <code>snake_case</code>, chỉ nên sử dụng nếu trong project đã viết theo cách này trước đó</p>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code><span style="color: #2838b0">function</span> <span style="color: #785840">testItReturnsFalseWhenInputNumberIsOdd</span><span style="color: #888888">()</span>
+</code></pre></div>
+</li>
+</ol>
+<h2 id="2-a3-arrange-asset-act"><img alt="✅" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2705.svg" title=":white_check_mark:" /> [2] A3 (Arrange, Asset, Act)<a class="headerlink" href="#2-a3-arrange-asset-act" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>A3 (Arrange, Asset, Act)</p>
+<ul>
+<li>Arrange: thiết lập trạng thái, khởi tạo object, giả lập mock</li>
+<li>Act: Chạy unit đang cần test (method under test)</li>
+<li>Assert: So sánh expected với kết quả trả về</li>
+</ul>
+</blockquote>
+<p><strong>Mục đích:</strong></p>
+<ul>
+<li>Nội dung test method rõ ràng dễ đọc, dễ viết</li>
+</ul>
+<p><strong>Thực hiện</strong></p>
+<ul>
+<li>
+<p>Chia nội dung test làm 3 phần</p>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code><span style="color: #2838b0">function</span> <span style="color: #785840">test_validation_failed_when_value_exceed_max_length</span><span style="color: #888888">()</span>
+<span style="color: #888888">{</span>
+    <span style="color: #888888; font-style: italic">// Arrange</span>
+    <span style="color: #b04040">$username</span> <span style="color: #666666">=</span> <span style="color: #388038">str_pad</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;a&#39;</span><span style="color: #888888">,</span> UsernameValidation<span style="color: #666666">::</span><span style="color: #388038">MAX_LENGTH</span> <span style="color: #666666">+</span> <span style="color: #444444">1</span><span style="color: #888888">);</span>
+
+    <span style="color: #888888; font-style: italic">// Act</span>
+    <span style="color: #b04040">$validation</span> <span style="color: #666666">=</span> <span style="color: #2838b0">new</span> UsernameValidation<span style="color: #888888">;</span>
+    <span style="color: #b04040">$isValidUsername</span> <span style="color: #666666">=</span> <span style="color: #b04040">$validation</span><span style="color: #666666">-&gt;</span><span style="color: #388038">isValid</span><span style="color: #888888">(</span><span style="color: #b04040">$username</span><span style="color: #888888">);</span>
+
+    <span style="color: #888888; font-style: italic">// Assert</span>
+    <span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">assertFalse</span><span style="color: #888888">(</span><span style="color: #b04040">$isValidUsername</span><span style="color: #888888">);</span>
+<span style="color: #888888">}</span>
+</code></pre></div>
+</li>
+<li>
+<p>Ngoại lệ khi test một method throw exception, do vấn đề kỹ thuật nên phải gọi <code>expectionException()</code> trước khi gọi method:</p>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code><span style="color: #2838b0">function</span> <span style="color: #785840">test_it_throws_exception_when_input_is_not_a_number</span><span style="color: #888888">()</span>
+<span style="color: #888888">{</span>
+    <span style="color: #888888; font-style: italic">// Assert that</span>
+    <span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">expectException</span><span style="color: #888888">(</span>InvalidArgumentException<span style="color: #666666">::</span><span style="color: #388038">class</span><span style="color: #888888">);</span>
+
+    <span style="color: #888888; font-style: italic">// Arrange</span>
+    <span style="color: #b04040">$calculator</span> <span style="color: #666666">=</span> <span style="color: #2838b0">new</span> Calculator<span style="color: #888888">;</span>
+    <span style="color: #b04040">$input1</span> <span style="color: #666666">=</span> <span style="color: #b83838">&#39;i am a string&#39;</span><span style="color: #888888">;</span>
+    <span style="color: #b04040">$input2</span> <span style="color: #666666">=</span> <span style="color: #444444">100</span><span style="color: #888888">;</span>
+
+    <span style="color: #888888; font-style: italic">// Act</span>
+    <span style="color: #b04040">$calculator</span><span style="color: #666666">-&gt;</span><span style="color: #388038">add</span><span style="color: #888888">(</span><span style="color: #b04040">$input1</span><span style="color: #888888">,</span> <span style="color: #b04040">$input2</span><span style="color: #888888">);</span>
+<span style="color: #888888">}</span>
+</code></pre></div>
+</li>
+</ul>
+<h2 id="3-use-sematicproper-assert-method"><img alt="✅" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2705.svg" title=":white_check_mark:" /> [3] Use sematic/proper assert method<a class="headerlink" href="#3-use-sematicproper-assert-method" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>Keep assert method descriptive. Use proper assert method to improve the readability of code and the error log.</p>
+</blockquote>
+<p>Sử dụng assertion phù hợp</p>
+<ul>
+<li>Code dễ đọc hiểu hơn</li>
+<li>Nếu assert failed thì message sinh ra cũng dễ hiểu hơn</li>
+<li>Signature của các method assert thường có các tham số theo thứ tự là expected value (giá trị mong muốn), actual value (giá trị thực tế khi chạy unit), message (message thông báo nếu fail) nên cần truyền theo thứ tự để PHPUnit có thể generate ra message báo lỗi chính xác</li>
+</ul>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code><span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">assertEquals</span><span style="color: #888888">(</span><span style="color: #b04040">$expected</span><span style="color: #888888">,</span> <span style="color: #b04040">$actual</span><span style="color: #888888">);</span>
+<span style="color: #888888; font-style: italic">// =&gt; Failed asserting that $actual matches expected $expected.</span>
+<span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">assertTrue</span><span style="color: #888888">(</span><span style="color: #b04040">$expected</span> <span style="color: #666666">==</span> <span style="color: #b04040">$actual</span><span style="color: #888888">);</span>
+<span style="color: #888888; font-style: italic">// =&gt; Failed asserting that false is true??</span>
+
+<span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">assertSame</span><span style="color: #888888">(</span><span style="color: #b04040">$expected</span><span style="color: #888888">,</span> <span style="color: #b04040">$actual</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">assertTrue</span><span style="color: #888888">(</span><span style="color: #b04040">$expected</span> <span style="color: #666666">===</span> <span style="color: #b04040">$actual</span><span style="color: #888888">);</span>
+
+<span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">assertContains</span><span style="color: #888888">(</span><span style="color: #b04040">$element</span><span style="color: #888888">,</span> <span style="color: #b04040">$array</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">assertTrue</span><span style="color: #888888">(</span><span style="color: #388038">in_array</span><span style="color: #888888">(</span><span style="color: #b04040">$element</span><span style="color: #888888">,</span> <span style="color: #b04040">$array</span><span style="color: #888888">);</span>
+
+<span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">assertCount</span><span style="color: #888888">(</span><span style="color: #b04040">$expected</span><span style="color: #888888">,</span> <span style="color: #b04040">$actual</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">assertTrue</span><span style="color: #888888">(</span><span style="color: #388038">count</span><span style="color: #888888">(</span><span style="color: #b04040">$actual</span><span style="color: #888888">)</span> <span style="color: #666666">==</span> <span style="color: #b04040">$expected</span><span style="color: #888888">);</span>
+
+<span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">assertInstanceOf</span><span style="color: #888888">(</span>ExpectedClass<span style="color: #666666">::</span><span style="color: #388038">class</span><span style="color: #888888">,</span> <span style="color: #b04040">$actual</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">assertTrue</span><span style="color: #888888">(</span><span style="color: #b04040">$actual</span> instanceOf ExpectedClass<span style="color: #888888">);</span>
+</code></pre></div>
+<h2 id="4-if-you-write-code-write-tests"><img alt="✅" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2705.svg" title=":white_check_mark:" /> [4] If you write code, write tests<a class="headerlink" href="#4-if-you-write-code-write-tests" title="Permanent link">&para;</a></h2>
+<p><strong>Thực hiện</strong></p>
+<p>Mọi PR đều phải chú ý đến test</p>
+<ul>
+<li>PR thêm feature =&gt; viết test cho feature mới</li>
+<li>PR fix bug =&gt; viết test để tránh bug xảy ra 1 lần nữa</li>
+<li>PR refactor =&gt; chạy, update test để đảm bảo không phát sinh ảnh hưởng</li>
+<li>Nên tích hợp CI để chạy test</li>
+</ul>
+<p><strong>FAQ</strong>:</p>
+<ol>
+<li>
+<p>Q: Thời điểm tốt nhất để viết test?</p>
+<p>A: Thời điểm tốt nhất là khi code còn mới! Thời điểm mà cả code và test đều có thể dễ dàng thay đổi. Tưởng tượng code giống như <em>đất sét</em>, khi còn mới thì nó mềm và dễ nặn, nếu để lâu thì nó sẽ cứng và dễ vỡ <img alt="😄" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f604.svg" title=":smile:" /></p>
+</li>
+</ol>
+<h2 id="5-unit-vs-integration"><img alt="✅" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2705.svg" title=":white_check_mark:" /> [5] Unit vs Integration?<a class="headerlink" href="#5-unit-vs-integration" title="Permanent link">&para;</a></h2>
+<p><strong>Rule đơn giản</strong></p>
+<ul>
+<li>Unit test<ul>
+<li>Test từng function hoặc method của một class</li>
+<li>Không thực hiện những việc sau:<ul>
+<li>Truy vấn cơ sở dữ liệu (làm chậm quá trình test)</li>
+<li>Sử dụng network (gửi mail, gọi api bên ngoài,...) (làm chậm, kết quả không ổn định vì phụ thuộc vào mạng)</li>
+<li>Sử dụng file system (làm chậm quá trình test)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Integration test<ul>
+<li>Test việc kết hợp giữa các unit (function, method) với nhau =&gt; test một nhóm Unit (ví dụ test route)</li>
+<li>Có thể truy vấn cơ sở dữ liệu (thiết lập một database test riêng biệt)</li>
+<li>Có thể sử dụng file system (test việc import/export file, file permission...)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Lời khuyên</strong></p>
+<p>Với người mới bắt đầu, bạn có thể bắt đầu đi từ integration test bằng việc test từng route.
+Trong quá trình viết integration test cố gắng split ra unit test nhỏ hơn nếu được.</p>
+<p>Quá nhiều integration test sẽ khiến thời gian chạy test lâu hơn, việc truy vết lỗi cũng khó khăn hơn do 1 feature chạy qua nhiều lớp, layer code.</p>
+<h2 id="6-my-tests-are-fast"><img alt="✅" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2705.svg" title=":white_check_mark:" /> [6] My tests are fast!<a class="headerlink" href="#6-my-tests-are-fast" title="Permanent link">&para;</a></h2>
+<p><strong>Thực hiện</strong></p>
+<ul>
+<li>Ngoài việc chú trọng vào việc viết test case đúng, cần chú ý đến thời gian chạy test</li>
+<li>Hạn chế test database (integration), và nếu có thể thì dùng sqlite in-memory làm database test</li>
+<li>Test không gọi network hay api service ngoài</li>
+<li>Khi test làm việc với file, cân nhắc sử dụng <a href="https://github.com/bovigo/vfsStream">vfsStream</a></li>
+<li>Khi chạy phpunit để generate code coverage cân nhắc lựa chọn driver thích hợp, xem thêm <a href="../04-code-coverage/">Code Coverage</a></li>
+</ul>
+<p><strong>Tại sao?</strong></p>
+<ul>
+<li>Bạn sẽ phải chạy tests thường xuyên, lặp lại =&gt; Nếu tests chạy quá chậm sẽ làm ảnh hưởng đến tiến độ, tinh thần làm việc</li>
+<li>Dự án áp dụng CI để build, test và deploy =&gt; Nếu tests chạy quá chậm sẽ dẫn đến việc tích hợp cho cả team bị chậm</li>
+</ul>
+<h2 id="7-quality-over-code-coverage-number"><img alt="✅" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/2705.svg" title=":white_check_mark:" /> [7] Quality over code coverage number!<a class="headerlink" href="#7-quality-over-code-coverage-number" title="Permanent link">&para;</a></h2>
+<p><strong>Sự thật về code coverage</strong></p>
+<ul>
+<li>Không cần viết test đúng vẫn có thể đạt 100% coverage!</li>
+<li>Có trường hợp đã đạt 100% coverage rồi nhưng vẫn có khả năng lọt bug vì thiếu test case</li>
+</ul>
+<p>=&gt; Tham khảo thêm cách phpunit tính coverage =&gt; <a href="https://github.com/sun7pro/phpunit-training-coverage/issues/2">link</a></p>
+<p><strong>Thực hiện</strong></p>
+<ul>
+<li>Chú trọng vào chất lượng test case, viết sao cho đủ test case? làm sao để test chạy nhanh hơn? làm sao để viết test dễ hơn, refactor code?</li>
+<li>Áp dụng mutation testing vào dự án nếu có thể, để có chỉ số đánh gía tốt hơn =&gt; <a href="../06-mutation-testing/">Mutation Testing</a></li>
+</ul>
+<h2 id="pull-request-template">Pull request template<a class="headerlink" href="#pull-request-template" title="Permanent link">&para;</a></h2>
+<p>Tham khảo <a href="https://github.com/sun7pro/.github/blob/master/PULL_REQUEST_TEMPLATE.md">https://github.com/sun7pro/.github/blob/master/PULL_REQUEST_TEMPLATE.md</a> để áp dụng pull request template cho dự án.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../07-laravel/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Laravel
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../09-tdd/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                TDD
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.fd16492e.min.js"></script>
+      <script src="../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
