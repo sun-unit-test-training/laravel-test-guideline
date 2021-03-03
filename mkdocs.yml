@@ -1,0 +1,21 @@
+site_name: PHP Testing Guidelines
+repo_url: https://github.com/sun-unit-test-training/php-testing-guideline
+theme:
+  name: material
+markdown_extensions:
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      pygments_style: lovelace
+      noclasses: true
+      extend_pygments_lang:
+        - name: php
+          lang: php
+          options:
+            startinline: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - toc:
+      permalink: true
