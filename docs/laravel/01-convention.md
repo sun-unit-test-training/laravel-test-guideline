@@ -1,6 +1,4 @@
-# Laravel
-
-## Conventions
+# Convention
 
 -   Cấu trúc thư mục
     -   Tất cả Unit Tests được đặt trong thư mục `tests/Unit` (xem config testsuite trong `phpunit.xml`)
