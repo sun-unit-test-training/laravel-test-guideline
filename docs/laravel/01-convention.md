@@ -2,7 +2,7 @@
 
 -   Cấu trúc thư mục
     -   Tất cả Unit Tests được đặt trong thư mục `tests/Unit` (xem config testsuite trong `phpunit.xml`)
-    -   Tất cả Integration Tests được đặt trong thư mục `tests/Integration`
+    -   Tất cả Integration Tests được đặt trong thư mục `tests/Feature`
     -   Nội dung bên trong thư mục `Unit` có cấu trúc giống với cấu trúc bên trong thư mục `app`. Ví dụ như Unit Test cho file `app/Models/User.php` tương ứng là `tests/Unit/Models/UserTest.php`
 -   Quy tắc đặt tên
     -   Thường có namespace bắt đầu với `Tests\` (xem phần `autoload-dev` trong composer.json)
