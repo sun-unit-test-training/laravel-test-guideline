@@ -182,7 +182,7 @@ Quá nhiều integration test sẽ khiến thời gian chạy test lâu hơn, vi
 **Thực hiện**
 
 -   Chú trọng vào chất lượng test case, viết sao cho đủ test case? làm sao để test chạy nhanh hơn? làm sao để viết test dễ hơn, refactor code?
--   Áp dụng mutation testing vào dự án nếu có thể, để có chỉ số đánh gía tốt hơn => [Mutation Testing](./06-mutation-testing.md)
+-   Áp dụng mutation testing vào dự án nếu có thể, để có chỉ số đánh gía tốt hơn => [Mutation Testing](./read-more/mutation-testing.md)
 
 ## Pull request template
 
