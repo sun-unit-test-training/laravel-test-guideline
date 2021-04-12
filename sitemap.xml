@@ -1,83 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
-     <loc>None</loc>
-     <lastmod>2021-03-09</lastmod>
+     <loc>https://sun-unit-test-training.github.io/php-testing-guideline/</loc>
+     <lastmod>2021-04-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>None</loc>
-     <lastmod>2021-03-09</lastmod>
+     <loc>https://sun-unit-test-training.github.io/php-testing-guideline/01-why/</loc>
+     <lastmod>2021-04-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>None</loc>
-     <lastmod>2021-03-09</lastmod>
+     <loc>https://sun-unit-test-training.github.io/php-testing-guideline/02-testcase/</loc>
+     <lastmod>2021-04-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>None</loc>
-     <lastmod>2021-03-09</lastmod>
+     <loc>https://sun-unit-test-training.github.io/php-testing-guideline/03-phpunit/</loc>
+     <lastmod>2021-04-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>None</loc>
-     <lastmod>2021-03-09</lastmod>
+     <loc>https://sun-unit-test-training.github.io/php-testing-guideline/04-code-coverage/</loc>
+     <lastmod>2021-04-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>None</loc>
-     <lastmod>2021-03-09</lastmod>
+     <loc>https://sun-unit-test-training.github.io/php-testing-guideline/05-test-doubles-and-di/</loc>
+     <lastmod>2021-04-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>None</loc>
-     <lastmod>2021-03-09</lastmod>
+     <loc>https://sun-unit-test-training.github.io/php-testing-guideline/06-checklist/</loc>
+     <lastmod>2021-04-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>None</loc>
-     <lastmod>2021-03-09</lastmod>
+     <loc>https://sun-unit-test-training.github.io/php-testing-guideline/laravel/01-convention/</loc>
+     <lastmod>2021-04-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>None</loc>
-     <lastmod>2021-03-09</lastmod>
+     <loc>https://sun-unit-test-training.github.io/php-testing-guideline/laravel/02-mocking/</loc>
+     <lastmod>2021-04-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>None</loc>
-     <lastmod>2021-03-09</lastmod>
+     <loc>https://sun-unit-test-training.github.io/php-testing-guideline/laravel/03-controller/</loc>
+     <lastmod>2021-04-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>None</loc>
-     <lastmod>2021-03-09</lastmod>
+     <loc>https://sun-unit-test-training.github.io/php-testing-guideline/laravel/04-model/</loc>
+     <lastmod>2021-04-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>None</loc>
-     <lastmod>2021-03-09</lastmod>
+     <loc>https://sun-unit-test-training.github.io/php-testing-guideline/laravel/05-repository-service/</loc>
+     <lastmod>2021-04-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>None</loc>
-     <lastmod>2021-03-09</lastmod>
+     <loc>https://sun-unit-test-training.github.io/php-testing-guideline/laravel/06-middleware/</loc>
+     <lastmod>2021-04-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>None</loc>
-     <lastmod>2021-03-09</lastmod>
+     <loc>https://sun-unit-test-training.github.io/php-testing-guideline/laravel/07-mail/</loc>
+     <lastmod>2021-04-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>None</loc>
-     <lastmod>2021-03-09</lastmod>
+     <loc>https://sun-unit-test-training.github.io/php-testing-guideline/laravel/08-command/</loc>
+     <lastmod>2021-04-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>None</loc>
-     <lastmod>2021-03-09</lastmod>
+     <loc>https://sun-unit-test-training.github.io/php-testing-guideline/laravel/09-queue/</loc>
+     <lastmod>2021-04-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>None</loc>
-     <lastmod>2021-03-09</lastmod>
+     <loc>https://sun-unit-test-training.github.io/php-testing-guideline/laravel/10-others/</loc>
+     <lastmod>2021-04-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>None</loc>
-     <lastmod>2021-03-09</lastmod>
+     <loc>https://sun-unit-test-training.github.io/php-testing-guideline/read-more/mockery/</loc>
+     <lastmod>2021-04-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>None</loc>
-     <lastmod>2021-03-09</lastmod>
+     <loc>https://sun-unit-test-training.github.io/php-testing-guideline/read-more/mutation-testing/</loc>
+     <lastmod>2021-04-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>None</loc>
-     <lastmod>2021-03-09</lastmod>
+     <loc>https://sun-unit-test-training.github.io/php-testing-guideline/read-more/references/</loc>
+     <lastmod>2021-04-12</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://sun-unit-test-training.github.io/php-testing-guideline/read-more/tdd/</loc>
+     <lastmod>2021-04-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

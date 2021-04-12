@@ -1,0 +1,1422 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="canonical" href="https://sun-unit-test-training.github.io/php-testing-guideline/read-more/mockery/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.6">
+    
+    
+      
+        <title>Mockery - PHP Testing Guidelines</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2c0c5eaf.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.7fa14f5b.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#mockery" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="PHP Testing Guidelines" class="md-header__button md-logo" aria-label="PHP Testing Guidelines" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PHP Testing Guidelines
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Mockery
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="md-header__options">
+      
+    </div>
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/sun-unit-test-training/php-testing-guideline" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="PHP Testing Guidelines" class="md-nav__button md-logo" aria-label="PHP Testing Guidelines" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    PHP Testing Guidelines
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/sun-unit-test-training/php-testing-guideline" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Giới thiệu
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../01-why/" class="md-nav__link">
+        Viết test để làm gì?
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-testcase/" class="md-nav__link">
+        Cơ bản về test case
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../03-phpunit/" class="md-nav__link">
+        PHPUnit
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../04-code-coverage/" class="md-nav__link">
+        Code Coverage
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../05-test-doubles-and-di/" class="md-nav__link">
+        Test Doubles và DI
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../06-checklist/" class="md-nav__link">
+        Checklist
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      <label class="md-nav__link" for="__nav_8">
+        Laravel
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Laravel" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Laravel
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../laravel/01-convention/" class="md-nav__link">
+        Convention
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../laravel/02-mocking/" class="md-nav__link">
+        Mocking
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../laravel/03-controller/" class="md-nav__link">
+        Controller
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../laravel/04-model/" class="md-nav__link">
+        Model
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../laravel/05-repository-service/" class="md-nav__link">
+        Repository / Service
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../laravel/06-middleware/" class="md-nav__link">
+        Middleware
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../laravel/07-mail/" class="md-nav__link">
+        Mail
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../laravel/08-command/" class="md-nav__link">
+        Command
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../laravel/09-queue/" class="md-nav__link">
+        Queue
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../laravel/10-others/" class="md-nav__link">
+        Others
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" checked>
+      
+      <label class="md-nav__link" for="__nav_9">
+        Read more
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Read more" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Read more
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Mockery
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Mockery
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#expectation" class="md-nav__link">
+    Expectation
+  </a>
+  
+    <nav class="md-nav" aria-label="Expectation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phương-thức" class="md-nav__link">
+    Phương thức
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tham-số" class="md-nav__link">
+    Tham số
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#match-tham-số-với-closure" class="md-nav__link">
+    Match tham số với closure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#match-tham-số-với-giá-trị-định-sẵn" class="md-nav__link">
+    Match tham số với giá trị định sẵn
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#any--no" class="md-nav__link">
+    Any / no
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return-value-expectation" class="md-nav__link">
+    Return value Expectation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#throw-exception" class="md-nav__link">
+    Throw exception
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kỳ-vọng-số-lần-gọi" class="md-nav__link">
+    Kỳ vọng số lần gọi
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#count-modifier" class="md-nav__link">
+    Count modifier
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#argument-validation" class="md-nav__link">
+    Argument Validation
+  </a>
+  
+    <nav class="md-nav" aria-label="Argument Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validate-tham-số" class="md-nav__link">
+    Validate tham số
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate-kiểu-dữ-liệu" class="md-nav__link">
+    Validate kiểu dữ liệu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capturing-arguments" class="md-nav__link">
+    Capturing Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bổ-sung-đối-sánh-tham-số" class="md-nav__link">
+    Bổ sung đối sánh tham số
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spies" class="md-nav__link">
+    Spies
+  </a>
+  
+    <nav class="md-nav" aria-label="Spies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#một-số-hàm-thông-dụng-của-spies" class="md-nav__link">
+    Một số hàm thông dụng của spies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#thay-thế-cú-pháp-shouldreceive" class="md-nav__link">
+    Thay thế cú pháp shouldReceive
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xem-thêm" class="md-nav__link">
+    Xem thêm
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mutation-testing/" class="md-nav__link">
+        Mutation Testing
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../references/" class="md-nav__link">
+        Tài liệu khác
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tdd/" class="md-nav__link">
+        TDD
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#expectation" class="md-nav__link">
+    Expectation
+  </a>
+  
+    <nav class="md-nav" aria-label="Expectation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#phương-thức" class="md-nav__link">
+    Phương thức
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tham-số" class="md-nav__link">
+    Tham số
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#match-tham-số-với-closure" class="md-nav__link">
+    Match tham số với closure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#match-tham-số-với-giá-trị-định-sẵn" class="md-nav__link">
+    Match tham số với giá trị định sẵn
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#any--no" class="md-nav__link">
+    Any / no
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#return-value-expectation" class="md-nav__link">
+    Return value Expectation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#throw-exception" class="md-nav__link">
+    Throw exception
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kỳ-vọng-số-lần-gọi" class="md-nav__link">
+    Kỳ vọng số lần gọi
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#count-modifier" class="md-nav__link">
+    Count modifier
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#argument-validation" class="md-nav__link">
+    Argument Validation
+  </a>
+  
+    <nav class="md-nav" aria-label="Argument Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validate-tham-số" class="md-nav__link">
+    Validate tham số
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate-kiểu-dữ-liệu" class="md-nav__link">
+    Validate kiểu dữ liệu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capturing-arguments" class="md-nav__link">
+    Capturing Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bổ-sung-đối-sánh-tham-số" class="md-nav__link">
+    Bổ sung đối sánh tham số
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#spies" class="md-nav__link">
+    Spies
+  </a>
+  
+    <nav class="md-nav" aria-label="Spies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#một-số-hàm-thông-dụng-của-spies" class="md-nav__link">
+    Một số hàm thông dụng của spies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#thay-thế-cú-pháp-shouldreceive" class="md-nav__link">
+    Thay thế cú pháp shouldReceive
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#xem-thêm" class="md-nav__link">
+    Xem thêm
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="mockery">Mockery<a class="headerlink" href="#mockery" title="Permanent link">&para;</a></h1>
+<h2 id="expectation">Expectation<a class="headerlink" href="#expectation" title="Permanent link">&para;</a></h2>
+<p><em><strong>Lưu ý:</strong> Để các <code>expectation</code> được thực hiện chúng ta phải gọi đến hàm <code>Mockery::close()</code>, tối nhất nó nên được để trong một callback method như <code>teardown</code> hoặc <code>_after</code>(tùy thuộc vào việc ta kết hợp Mockery với framework nào. Với Laravel là <code>teardown</code>). Lệnh này dọn dẹp vùng chứa Mockery được sử dụng bởi hàm test hiện tại và sẽ chạy bất kỳ tác vụ nào cho <code>expectation</code></em></p>
+<p>Khi đã tạo một mock object nghĩa là chúng ta muốn xác định chính xác cách nó hoạt động (nó được gọi như thế nào). Đây chính là việc định nghĩa một <code>expectation</code></p>
+<h3 id="phương-thức">Phương thức<a class="headerlink" href="#phương-thức" title="Permanent link">&para;</a></h3>
+<p>Để nói với test chúng ta sẽ thực hiện gọi một method với tên chỉ định, sử dụng phương thức <code>shouldReceive</code>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">);</span>
+</code></pre></div>
+Đây sẽ là <code>expectation</code> mà dựa vào đó tất cả các <code>kỳ vọng</code> ràng buộc khác được thêm vào.</p>
+<p>Chúng ta có thể định nghĩa nhiều method
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method_1&#39;</span><span style="color: #888888">,</span> <span style="color: #b83838">&#39;name_of_method_2&#39;</span><span style="color: #888888">);</span>
+</code></pre></div>
+Có thể khai báo các  <code>expectation</code> cùng với giá trị mà nó trả về
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">([</span>
+    <span style="color: #b83838">&#39;name_of_method_1&#39;</span> <span style="color: #666666">=&gt;</span> <span style="color: #b83838">&#39;return value 1&#39;</span><span style="color: #888888">,</span>
+    <span style="color: #b83838">&#39;name_of_method_2&#39;</span> <span style="color: #666666">=&gt;</span> <span style="color: #b83838">&#39;return value 2&#39;</span><span style="color: #888888">,</span>
+<span style="color: #888888">]);</span>
+</code></pre></div>
+Cách khác để thiết lập phương thức và kỳ vọng của nó:
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">,</span> <span style="color: #888888">[</span>
+    <span style="color: #b83838">&#39;name_of_method_1&#39;</span> <span style="color: #666666">=&gt;</span> <span style="color: #b83838">&#39;return value 1&#39;</span><span style="color: #888888">,</span>
+    <span style="color: #b83838">&#39;name_of_method_2&#39;</span> <span style="color: #666666">=&gt;</span> <span style="color: #b83838">&#39;return value 2&#39;</span>
+<span style="color: #888888">]);</span>
+</code></pre></div>
+Chúng ta cũng có thể định nghĩa những method không nên được gọi
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldNotReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">);</span>
+</code></pre></div>
+Phương thức này chính là việc gọi ngắn gọn <code>shouldReceive()-&gt;never()</code></p>
+<h3 id="tham-số">Tham số<a class="headerlink" href="#tham-số" title="Permanent link">&para;</a></h3>
+<p>Với mọi phương thức khai báo kỳ vọng, chúng ta có thể thêm kỳ vọng về tham số được truyền vào:
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span><span style="color: #b04040">$arg1</span><span style="color: #888888">,</span> <span style="color: #b04040">$arg2</span><span style="color: #888888">,</span> <span style="color: #666666">...</span><span style="color: #888888">);</span>
+<span style="color: #888888; font-style: italic">// or</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">withArgs</span><span style="color: #888888">([</span><span style="color: #b04040">$arg1</span><span style="color: #888888">,</span> <span style="color: #b04040">$arg2</span><span style="color: #888888">,</span> <span style="color: #666666">...</span><span style="color: #888888">]);</span>
+</code></pre></div>
+Để tăng tính linh hoạt, ta có thể sử dụng các <code>matcher class</code>. Ví dụ phương thức <code>\Mockery::any()</code>sẽ khớp bất kỳ tham số nào được truyền với <code>with</code>. Mockery cho phép thư viện <code>Hamcrest</code>, ví dụ hàm <code>anything()</code> chính là tương đương <code>\Mockery::any()</code>.</p>
+<p>Một điều quan trọng cần lưu ý, điều này có nghĩa là tất cả các expectation được đính kèm sẽ chỉ apply cho method khi nó gọi chính xác các tham số.
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)</span><span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;Hello&#39;</span><span style="color: #888888">);</span>
+
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">foo</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;Goodbye&#39;</span><span style="color: #888888">);</span> <span style="color: #888888; font-style: italic">// throws a NoMatchingExpectationException</span>
+</code></pre></div>
+Điều này cho phép thiết lập các kỳ vọng khác nhau dựa trên tham số được cung cấp cho các cuộc gọi dự kiến.</p>
+<h3 id="match-tham-số-với-closure">Match tham số với closure<a class="headerlink" href="#match-tham-số-với-closure" title="Permanent link">&para;</a></h3>
+<p>Thay vì cung cấp một trình đối khớp cho từng tham số, ta có thể cung cấp một <code>closure</code> cho tất cả các tham số được truyền một lúc:
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">withArgs</span><span style="color: #888888">(</span>closure<span style="color: #888888">);</span>
+</code></pre></div></p>
+<p><code>Closure</code> nhận tất cả các tham số được truyền khi gọi đến phương thức. Bằng cách này <code>expectation</code> sẽ chỉ được apply cho method có tham số truyền vào thỏa mãn closure
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)</span><span style="color: #666666">-&gt;</span><span style="color: #388038">withArgs</span><span style="color: #888888">(</span><span style="color: #2838b0">function</span> <span style="color: #888888">(</span><span style="color: #b04040">$arg</span><span style="color: #888888">)</span> <span style="color: #888888">{</span>
+    <span style="color: #2838b0">if</span> <span style="color: #888888">(</span><span style="color: #b04040">$arg</span> <span style="color: #666666">%</span> <span style="color: #444444">2</span> <span style="color: #666666">==</span> <span style="color: #444444">0</span><span style="color: #888888">)</span> <span style="color: #888888">{</span>
+        <span style="color: #2838b0">return</span> <span style="color: #2838b0">true</span><span style="color: #888888">;</span>
+    <span style="color: #888888">}</span>
+    <span style="color: #2838b0">return</span> <span style="color: #2838b0">false</span><span style="color: #888888">;</span>
+<span style="color: #888888">});</span>
+
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">foo</span><span style="color: #888888">(</span><span style="color: #444444">4</span><span style="color: #888888">);</span> <span style="color: #888888; font-style: italic">// matches the expectation</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">foo</span><span style="color: #888888">(</span><span style="color: #444444">3</span><span style="color: #888888">);</span> <span style="color: #888888; font-style: italic">// throws a NoMatchingExpectationException</span>
+</code></pre></div></p>
+<h3 id="match-tham-số-với-giá-trị-định-sẵn">Match tham số với giá trị định sẵn<a class="headerlink" href="#match-tham-số-với-giá-trị-định-sẵn" title="Permanent link">&para;</a></h3>
+<p>Chúng ta có thể cung cấp các tham số được mong đợi match với tham số được truyền vào khi một mock method được gọi
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">withSomeOfArgs</span><span style="color: #888888">(</span>arg1<span style="color: #888888">,</span> arg2<span style="color: #888888">,</span> arg3<span style="color: #888888">,</span> <span style="color: #666666">...</span><span style="color: #888888">);</span>
+</code></pre></div>
+Thứ tự của các tham số không quan trọng, nó chỉ check có bao gồm giá trị mong đợi hay không, kiểu giá trị cũng cần phải được match
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">withSomeOfArgs</span><span style="color: #888888">(</span><span style="color: #444444">1</span><span style="color: #888888">,</span> <span style="color: #444444">2</span><span style="color: #888888">);</span>
+
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">foo</span><span style="color: #888888">(</span><span style="color: #444444">1</span><span style="color: #888888">,</span> <span style="color: #444444">2</span><span style="color: #888888">,</span> <span style="color: #444444">3</span><span style="color: #888888">);</span>  <span style="color: #888888; font-style: italic">// matches the expectation</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">foo</span><span style="color: #888888">(</span><span style="color: #444444">3</span><span style="color: #888888">,</span> <span style="color: #444444">2</span><span style="color: #888888">,</span> <span style="color: #444444">1</span><span style="color: #888888">);</span>  <span style="color: #888888; font-style: italic">// matches the expectation (passed order doesn&#39;t matter)</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">foo</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;1&#39;</span><span style="color: #888888">,</span> <span style="color: #b83838">&#39;2&#39;</span><span style="color: #888888">);</span> <span style="color: #888888; font-style: italic">// throws a NoMatchingExpectationException (type should be matched)</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">foo</span><span style="color: #888888">(</span><span style="color: #444444">3</span><span style="color: #888888">);</span>        <span style="color: #888888; font-style: italic">// throws a NoMatchingExpectationException</span>
+</code></pre></div></p>
+<h3 id="any--no">Any / no<a class="headerlink" href="#any--no" title="Permanent link">&para;</a></h3>
+<p>Chúng ta có thể khai báo rằng <code>expectation</code>match với bất kỳ tham số nào
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">withAnyArgs</span><span style="color: #888888">();</span>
+</code></pre></div>
+Điều này luôn được set mặc định trừ khi có chỉ địng khác.</p>
+<p>Ngoài ra chúng ta có thể khai báo <code>exptation</code> match với việc gọi phương thức không có đối số.
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">withNoArgs</span><span style="color: #888888">();</span>
+</code></pre></div></p>
+<h3 id="return-value-expectation">Return value <code>Expectation</code><a class="headerlink" href="#return-value-expectation" title="Permanent link">&para;</a></h3>
+<p>Với mock object. chúng ta có thể khai báo với <code>Mockery</code> kết quả trả về của một method với <code>andReturn()</code>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">andReturn</span><span style="color: #888888">(</span><span style="color: #b04040">$value</span><span style="color: #888888">);</span>
+</code></pre></div>
+Nó thiết lập giá trụ được trả về từ việc gọi phương thức.</p>
+<p>Có thể thiết lập kỳ vọng cho nhiều giá trị trả về:
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">andReturn</span><span style="color: #888888">(</span><span style="color: #b04040">$value1</span><span style="color: #888888">,</span> <span style="color: #b04040">$value2</span><span style="color: #888888">,</span> <span style="color: #666666">...</span><span style="color: #888888">)</span>
+</code></pre></div>
+Như vậy lần gọi đầu tiên sẽ trả về <code>$value1</code> và lần gọi tiếp theo sẽ trả về <code>$value2</code>.</p>
+<p>Nếu gọi phương thức nhiều lần hơn số return value mà chúng ta đã khai báo, Mockery sẽ trả về giá trị cuối cùng cho bất kỳ lệnh gọi phương thức tiếp theo nào
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)</span><span style="color: #666666">-&gt;</span><span style="color: #388038">andReturn</span><span style="color: #888888">(</span><span style="color: #444444">1</span><span style="color: #888888">,</span> <span style="color: #444444">2</span><span style="color: #888888">,</span> <span style="color: #444444">3</span><span style="color: #888888">);</span>
+
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">foo</span><span style="color: #888888">();</span> <span style="color: #888888; font-style: italic">// int(1)</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">foo</span><span style="color: #888888">();</span> <span style="color: #888888; font-style: italic">// int(2)</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">foo</span><span style="color: #888888">();</span> <span style="color: #888888; font-style: italic">// int(3)</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">foo</span><span style="color: #888888">();</span> <span style="color: #888888; font-style: italic">// int(3)</span>
+</code></pre></div>
+Hoặc sử dụng cú pháp
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">andReturnValues</span><span style="color: #888888">([</span><span style="color: #b04040">$value1</span><span style="color: #888888">,</span> <span style="color: #b04040">$value2</span><span style="color: #888888">,</span> <span style="color: #666666">...</span><span style="color: #888888">])</span>
+</code></pre></div>
+Với cú pháp trên, thứ tự trả về được xác định bởi chỉ số của mảng và cũng tương tự cách đầu, giá trị cuối cùng sẽ được apply cho tất cả các lần gọi hàm sau đó.</p>
+<p>Hai cú pháp sau đây sẽ chủ yếu để giao tiếp với người đọc test:
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">andReturnNull</span><span style="color: #888888">();</span>
+<span style="color: #888888; font-style: italic">// or</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">andReturn</span><span style="color: #888888">([</span><span style="color: #2838b0">null</span><span style="color: #888888">]);</span>
+</code></pre></div>
+Nó đánh dấu những lần gọi phương thức của mock object trả về null hoặc không gì cả.</p>
+<p>Đôi khi chúng ta muốn tính kết quả trả về, dựa vào các tham số được truyền, khi ấy chúng ta cần dùng <code>andReturnUsing()</code>. Nó nhận nhiều hơn một <code>closure</code>.</p>
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">andReturnUsing</span><span style="color: #888888">(</span>closure<span style="color: #888888">,</span> <span style="color: #666666">...</span><span style="color: #888888">);</span>
+</code></pre></div>
+Closure được sắp xếp theo hàng đợi bằng cách truyền chúng dưới dạng tham số cho hàm <code>andReturn()</code>.</p>
+<p>Đôi khi phương thức sẽ trả về chính một trong các đối số được truyền vào. Khi đó phương thức <code>andReturnArg()</code> sẽ hữu ích, tham số được trả về chúng là index trong list tham số
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">andReturnArg</span><span style="color: #888888">(</span><span style="color: #444444">1</span><span style="color: #888888">);</span>
+</code></pre></div>
+Đoạn trên sẽ trả về đối số thứ 2 (có index là 1) từ danh sách các đối số khi thực hiện gọi hàm.</p>
+<p><em><strong>Lưu ý:</strong> Không thể mix <code>andReturnUsing()</code> hoặc <code>andReturnArg</code> với <code>andReturn()</code></em></p>
+<p>Nếu muốn mock <code>fluid interface</code>, phương thức sau sẽ hữu dụng:
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">andReturnSelf</span><span style="color: #888888">();</span>
+</code></pre></div>
+Nó thiết lập giá trị trả về là tên class được mock.</p>
+<h3 id="throw-exception">Throw exception<a class="headerlink" href="#throw-exception" title="Permanent link">&para;</a></h3>
+<p>Chúng ta có thể giả lập phương thức sẽ throw exception:
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">andThrow</span><span style="color: #888888">(</span><span style="color: #2838b0">new</span> Exception<span style="color: #888888">);</span>
+</code></pre></div>
+Thay vì một đối đượng, ta cs thể truyền vào một Exception class, message và / hoặc code.
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">andThrow</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;exception_name&#39;</span><span style="color: #888888">,</span> <span style="color: #b83838">&#39;message&#39;</span><span style="color: #888888">,</span> <span style="color: #444444">123456789</span><span style="color: #888888">);</span>
+</code></pre></div></p>
+<h3 id="kỳ-vọng-số-lần-gọi">Kỳ vọng số lần gọi<a class="headerlink" href="#kỳ-vọng-số-lần-gọi" title="Permanent link">&para;</a></h3>
+<p>Bên cạnh việc thiết lập <code>expectation</code> cho các tham số truyền vào hàm và kết quả trả về của chúng, chúng ta có thể thiết lập kỳ vọng về số lần gọi đến hàm đó.</p>
+<p>Khi thiết lập kỳ vọng số lần gọi cho một phương thức không được gọi đến sẽ throw <code>\Mockery\Expectation\InvalidCountException</code>.</p>
+<p><em><strong>Lưu ý:</strong> Phương thức này bắt buộc phải gọi <code>\Mockery::close()</code> ở cuối test, chẳng hạn như có thể gọi ở phương thức <code>teardown</code> với PHPUnit. Nếu không Mockery sẽ không xác minh các lệnh gọi đối với mock object (vì thế việc count cũng không thể thực hiện)</em></p>
+<p>Để khai báo phương thức sẽ được gọi 0 hoặc nhiều lần:
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">zeroOrMoreTimes</span><span style="color: #888888">();</span>
+</code></pre></div>
+Điều này cũng là mặc định với tất cả các method.</p>
+<p>Để nói với Mockery một số lượng chính xác số lần gọi hàm, ta sẽ sử dụng như sau:
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code>$mock = \Mockery::mock(&#39;MyClass&#39;);
+$mock-&gt;shouldReceive(&#39;name_of_method&#39;)
+    -&gt;times($n);
+</code></pre></div>
+Với $n sẽ là số lần hàm được gọi.</p>
+<p>Một vài trường hợp phổ biến sẽ có phương thức gọi trực tiếp.</p>
+<p>Định nghĩa method mong đợi được gọi một lần
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">once</span><span style="color: #888888">();</span>
+</code></pre></div>
+Với phương thức được gọi hai lần
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">twice</span><span style="color: #888888">();</span>
+</code></pre></div>
+Phương thức không được gọi
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">never</span><span style="color: #888888">();</span>
+</code></pre></div></p>
+<h3 id="count-modifier">Count modifier<a class="headerlink" href="#count-modifier" title="Permanent link">&para;</a></h3>
+<p>Mockery bổ sung một số phương thức để thiết lập kỳ vọng cho số lần gọi method</p>
+<p>Nếu muốn khai báo số lần tối thiểu một phương thức sẽ được gọi, sử dụng <code>atLeast()</code>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">atLeast</span><span style="color: #888888">()</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">times</span><span style="color: #888888">(</span><span style="color: #444444">3</span><span style="color: #888888">);</span>
+</code></pre></div>
+Đoạn code trên có nghĩa là phương thức được gọi ít  nhất 3 lần.</p>
+<p>Tương tự, chúng ta cũng có thể khai báo cho Mockery biết số lần nhiều nhất một phương thức có thể được gọi với <code>atMost()</code>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">atMost</span><span style="color: #888888">()</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">times</span><span style="color: #888888">(</span><span style="color: #444444">3</span><span style="color: #888888">);</span>
+</code></pre></div>
+Ngoài ra, để set phạm vi số lần được gọi:
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;name_of_method&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">between</span><span style="color: #888888">(</span><span style="color: #b04040">$min</span><span style="color: #888888">,</span> <span style="color: #b04040">$max</span><span style="color: #888888">);</span>
+</code></pre></div>
+Bản chất của <code>between()</code> chính là việc sử dụng <code>atLeast()-&gt;times($min)-&gt;atMost()-&gt;times($max)</code></p>
+<h2 id="argument-validation">Argument Validation<a class="headerlink" href="#argument-validation" title="Permanent link">&para;</a></h2>
+<h3 id="validate-tham-số">Validate tham số<a class="headerlink" href="#validate-tham-số" title="Permanent link">&para;</a></h3>
+<p>Đây chính là việc match tham số khi tạo một kỳ vọng cho tham số truyền vào phương thức.</p>
+<p>Mockery sẽ hỗ trợ thư viện Hamcrest. Các ví dụ dưới đây tìm hiểu về các hàm match của Mockery và hàm tương đồng phía Hamcrest</p>
+<p><em><strong>Lưu ý:</strong> Nếu bạn không muốn sử dụng hàm global của Hamcrest thì có thể sử dụng class <code>\Hamcrest\Matchers</code>. Ví dụ <code>identicalTo($arg)</code> chính là <code>\Hamcrest\Matchers::identicalTo($arg)</code></em></p>
+<p>Trình match phổ biến nhất chính là hàm <code>with()</code>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span><span style="color: #444444">1</span><span style="color: #888888">)</span><span style="color: #666666">:</span>
+</code></pre></div>
+Mockery sẽ hiểu nó cần được gọi hàm <code>foo</code> với tham số kiểu <code>integer</code> giá trị <code>1</code>. Trong tường hợp này, Mockery đầy tiên sẽ thử so sánh với phép <code>===</code>. Nếu nó fail phép thử này Mockery sẽ cố gắng fallback với phép so sánh <code>==</code>.</p>
+<p>Khi thực hiện match một object Mockery chỉ sử dụng phép so sánh <code>===</code>.
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$object</span> <span style="color: #666666">=</span> <span style="color: #2838b0">new</span> <span style="color: #2838b0">stdClass</span><span style="color: #888888">();</span>
+<span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&quot;foo&quot;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span><span style="color: #b04040">$object</span><span style="color: #888888">);</span>
+
+<span style="color: #888888; font-style: italic">// Hamcrest equivalent</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&quot;foo&quot;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span>identicalTo<span style="color: #888888">(</span><span style="color: #b04040">$object</span><span style="color: #888888">));</span>
+</code></pre></div></p>
+<p>instance khác của <code>stdCalss</code> sẽ không được coi là match.</p>
+<p><em><strong>Lưu ý:</strong> <code>Mockery\Matcher\MustBe</code> sẽ không được sử dụng nữa</em></p>
+<p>Còn nếu bạn chỉ muốn so sánh <code>==</code> cho object thì sẽ phải dùng phương thức <code>equalTo</code> của Hamcrest
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&quot;foo&quot;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span>equalTo<span style="color: #888888">(</span><span style="color: #2838b0">new</span> <span style="color: #2838b0">stdClass</span><span style="color: #888888">));</span>
+</code></pre></div>
+Trong trường hợp chúng ta không quan tâm đến kiểu dữ liệu, giá trị của biến được truyền vào, chỉ cần có bất kì tham số nào đó trược truyền vào, sử dụng <code>any()</code>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&quot;foo&quot;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span>\Mockery<span style="color: #666666">::</span><span style="color: #388038">any</span><span style="color: #888888">());</span>
+
+<span style="color: #888888; font-style: italic">// Hamcrest equivalent</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&quot;foo&quot;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span>anything<span style="color: #888888">())</span>
+</code></pre></div></p>
+<h3 id="validate-kiểu-dữ-liệu">Validate kiểu dữ liệu<a class="headerlink" href="#validate-kiểu-dữ-liệu" title="Permanent link">&para;</a></h3>
+<p>Hàm <code>type()</code> sẽ nhận một chuỗi, chuỗ đó sẽ được ghép vào <code>is_</code> để tạo thành một phép kiểu tra hợp lệ</p>
+<p>Để match bất kỳ PHP resource nào ta sẽ truyền <code>resource</code> vào hàm <code>type()</code></p>
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&quot;foo&quot;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span>\Mockery<span style="color: #666666">::</span><span style="color: #388038">type</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;resource&#39;</span><span style="color: #888888">));</span>
+
+<span style="color: #888888; font-style: italic">// Hamcrest equivalents</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&quot;foo&quot;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span>resourceValue<span style="color: #888888">());</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&quot;foo&quot;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span>typeOf<span style="color: #888888">(</span><span style="color: #b83838">&#39;resource&#39;</span><span style="color: #888888">));</span>
+</code></pre></div>
+Nó sẽ trả về <code>true</code> từ một <code>is_resoruce</code> được gọi nếu đối số được truyền vào là một resource của PHP. Ví dụ tiếp để dễ hiểu hơn<code>\Mockery::type('float')</code> hoặc <code>floatValue()</code> và <code>typeOf('float')</code> kiểm tra sử dụng <code>is_float()</code>, và <code>\Mockery::type('callable')</code> hay <code>callable()</code> của Hamcrest sử dụng <code>is_callable()</code>.</p>
+<p><code>type()</code> cũng chấp nhận tên của một class hay một interface được sử dụng trong <code>instanceOf</code>. Hàm tương tự của Hamcrest là <code>anInstanceOf</code>.</p>
+<p>Tham khảo đầy đủ các hàm check tại <a href="https://www.php.net/manual/en/ref.var.php">php.net</a> và các <a href="https://github.com/hamcrest/hamcrest-php/blob/master/hamcrest/Hamcrest.php">hàm của Hamcrest </a></p>
+<p>Nếu muốn thực hiện match đối số một cách phức tạp hơn, <code>on()</code> chính là hàm hỗ trợ điều này. Nó chấp nhận <code>anonymous function</code> là một đối số được truyền vào.
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&quot;foo&quot;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span>\Mockery<span style="color: #666666">::</span><span style="color: #388038">on</span><span style="color: #888888">(</span>closure<span style="color: #888888">));</span>
+</code></pre></div>
+Nếu closure trả về <code>true</code> nghĩa là tham số được giả định khớp với kỳ vọng và ngược lại
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span>\Mockery<span style="color: #666666">::</span><span style="color: #388038">on</span><span style="color: #888888">(</span><span style="color: #2838b0">function</span> <span style="color: #888888">(</span><span style="color: #b04040">$argument</span><span style="color: #888888">)</span> <span style="color: #888888">{</span>
+        <span style="color: #2838b0">if</span> <span style="color: #888888">(</span><span style="color: #b04040">$argument</span> <span style="color: #666666">%</span> <span style="color: #444444">2</span> <span style="color: #666666">==</span> <span style="color: #444444">0</span><span style="color: #888888">)</span> <span style="color: #888888">{</span>
+            <span style="color: #2838b0">return</span> <span style="color: #2838b0">true</span><span style="color: #888888">;</span>
+        <span style="color: #888888">}</span>
+        <span style="color: #2838b0">return</span> <span style="color: #2838b0">false</span><span style="color: #888888">;</span>
+    <span style="color: #888888">}));</span>
+
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">foo</span><span style="color: #888888">(</span><span style="color: #444444">4</span><span style="color: #888888">);</span> <span style="color: #888888; font-style: italic">// matches the expectation</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">foo</span><span style="color: #888888">(</span><span style="color: #444444">3</span><span style="color: #888888">);</span> <span style="color: #888888; font-style: italic">// throws a NoMatchingExpectationException</span>
+</code></pre></div>
+Không có phiên bản Hamcrest nào cho <code>on()</code>.</p>
+<p>Ngoài ra, chúng ta có thể sử dụng phương thức <code>withArgs()</code>. Closure sẽ kiểm tra các đối số được truyền vào phương thức được kỳ vọng và đối số là khớp nếu closure trả về true.
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&quot;foo&quot;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">withArgs</span><span style="color: #888888">(</span>closure<span style="color: #888888">);</span>
+</code></pre></div></p>
+<p><code>Closue</code> match cũng hỗ trợ tham số là <code>optional</code>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$closure</span> <span style="color: #666666">=</span> <span style="color: #2838b0">function</span> <span style="color: #888888">(</span><span style="color: #b04040">$odd</span><span style="color: #888888">,</span> <span style="color: #b04040">$even</span><span style="color: #888888">,</span> <span style="color: #b04040">$sum</span> <span style="color: #666666">=</span> <span style="color: #2838b0">null</span><span style="color: #888888">)</span> <span style="color: #888888">{</span>
+    <span style="color: #b04040">$result</span> <span style="color: #666666">=</span> <span style="color: #888888">(</span><span style="color: #b04040">$odd</span> <span style="color: #666666">%</span> <span style="color: #444444">2</span> <span style="color: #666666">!=</span> <span style="color: #444444">0</span><span style="color: #888888">)</span> <span style="color: #666666">&amp;&amp;</span> <span style="color: #888888">(</span><span style="color: #b04040">$even</span> <span style="color: #666666">%</span> <span style="color: #444444">2</span> <span style="color: #666666">==</span> <span style="color: #444444">0</span><span style="color: #888888">);</span>
+    <span style="color: #2838b0">if</span> <span style="color: #888888">(</span><span style="color: #666666">!</span><span style="color: #388038">is_null</span><span style="color: #888888">(</span><span style="color: #b04040">$sum</span><span style="color: #888888">))</span> <span style="color: #888888">{</span>
+        <span style="color: #2838b0">return</span> <span style="color: #b04040">$result</span> <span style="color: #666666">&amp;&amp;</span> <span style="color: #888888">(</span><span style="color: #b04040">$odd</span> <span style="color: #666666">+</span> <span style="color: #b04040">$even</span> <span style="color: #666666">==</span> <span style="color: #b04040">$sum</span><span style="color: #888888">);</span>
+    <span style="color: #888888">}</span>
+    <span style="color: #2838b0">return</span> <span style="color: #b04040">$result</span><span style="color: #888888">;</span>
+<span style="color: #888888">};</span>
+
+<span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)</span><span style="color: #666666">-&gt;</span><span style="color: #388038">withArgs</span><span style="color: #888888">(</span><span style="color: #b04040">$closure</span><span style="color: #888888">);</span>
+
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">foo</span><span style="color: #888888">(</span><span style="color: #444444">1</span><span style="color: #888888">,</span> <span style="color: #444444">2</span><span style="color: #888888">);</span> <span style="color: #888888; font-style: italic">// It matches the expectation: the optional argument is not needed</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">foo</span><span style="color: #888888">(</span><span style="color: #444444">1</span><span style="color: #888888">,</span> <span style="color: #444444">2</span><span style="color: #888888">,</span> <span style="color: #444444">3</span><span style="color: #888888">);</span> <span style="color: #888888; font-style: italic">// It also matches the expectation: the optional argument pass the validation</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">foo</span><span style="color: #888888">(</span><span style="color: #444444">1</span><span style="color: #888888">,</span> <span style="color: #444444">2</span><span style="color: #888888">,</span> <span style="color: #444444">4</span><span style="color: #888888">);</span> <span style="color: #888888; font-style: italic">// It doesn&#39;t match the expectation: the optional doesn&#39;t pass the validation</span>
+</code></pre></div>
+Nếu muốn so khớp một đối số  với một biểu thức chính quy, Mockery hỗ trợ phương thức <code>pattern()</code>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span>\Mockery<span style="color: #666666">::</span><span style="color: #388038">pattern</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;/^foo/&#39;</span><span style="color: #888888">));</span>
+
+<span style="color: #888888; font-style: italic">// Hamcrest equivalent</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span>matchesPattern<span style="color: #888888">(</span><span style="color: #b83838">&#39;/^foo/&#39;</span><span style="color: #888888">));</span>
+</code></pre></div>
+<code>ducktype()</code> là một phương thức để match kiểu của class
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span>\Mockery<span style="color: #666666">::</span><span style="color: #388038">ducktype</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">,</span> <span style="color: #b83838">&#39;bar&#39;</span><span style="color: #888888">));</span>
+</code></pre></div>
+Nó sẽ khớp bất kỳ tham số nào là một đối tượng chứa danh sách các chứa danh sách các method đã được cung cấp. Tương tự với <code>on()</code>, không có version Hamcrest nào cho <code>ducktype()</code>.</p>
+<h3 id="capturing-arguments">Capturing Arguments<a class="headerlink" href="#capturing-arguments" title="Permanent link">&para;</a></h3>
+<p>Nếu chúng ta muốn thực hiện nhiều match cho cùng một đối số, <code>capture</code> cung cấp một giải pháp để cùng hàm <code>on()</code> phục vụ điều đó.
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&quot;foo&quot;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span>\Mockery<span style="color: #666666">::</span><span style="color: #388038">capture</span><span style="color: #888888">(</span><span style="color: #b04040">$bar</span><span style="color: #888888">));</span>
+</code></pre></div>
+Nó chỉ địng tất cả những đối số nào được truyền cho <code>foo</code> vào biến<code>$bar</code>, từ đó ta sẽ bổ sung validation sử dụng assertion.</p>
+<h3 id="bổ-sung-đối-sánh-tham-số">Bổ sung đối sánh tham số<a class="headerlink" href="#bổ-sung-đối-sánh-tham-số" title="Permanent link">&para;</a></h3>
+<p><code>not()</code> sẽ khớp với bất kỳ đối số nó không bằng hoặc không giống với tham số được truyền vào nó
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span>\Mockery<span style="color: #666666">::</span><span style="color: #388038">not</span><span style="color: #888888">(</span><span style="color: #444444">2</span><span style="color: #888888">));</span>
+
+<span style="color: #888888; font-style: italic">// Hamcrest equivalent</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span><span style="color: #2838b0">not</span><span style="color: #888888">(</span><span style="color: #444444">2</span><span style="color: #888888">));</span>
+</code></pre></div></p>
+<p><code>anyOf()</code>  sẽ match nếu như tham số của <code>expectation</code> bằng một trong bất kỳ tham số nào của hàm
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span>\Mockery<span style="color: #666666">::</span><span style="color: #388038">anyOf</span><span style="color: #888888">(</span><span style="color: #444444">1</span><span style="color: #888888">,</span> <span style="color: #444444">2</span><span style="color: #888888">));</span>
+
+<span style="color: #888888; font-style: italic">// Hamcrest equivalent</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span>anyOf<span style="color: #888888">(</span><span style="color: #444444">1</span><span style="color: #888888">,</span><span style="color: #444444">2</span><span style="color: #888888">));</span>
+</code></pre></div>
+<code>notAnyOf()</code> sẽ ngược lại với <code>anyOf()</code> nó sẽ match nếu như tham số của <code>expectation</code> không bằng bất kỳ tham số nào của phương thức:
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span>\Mockery<span style="color: #666666">::</span><span style="color: #388038">notAnyOf</span><span style="color: #888888">(</span><span style="color: #444444">1</span><span style="color: #888888">,</span> <span style="color: #444444">2</span><span style="color: #888888">));</span>
+</code></pre></div>
+<code>notAnyOf()</code> sẽ không có bên Hamcrest</p>
+<p><code>subset()</code> sẽ match nếu như tham số là một mảng có chứa mảng đã cho.f
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span>\Mockery<span style="color: #666666">::</span><span style="color: #388038">subset</span><span style="color: #888888">(</span><span style="color: #2838b0">array</span><span style="color: #888888">(</span><span style="color: #444444">0</span> <span style="color: #666666">=&gt;</span> <span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)));</span>
+</code></pre></div></p>
+<p>Việc này sẽ thực hiện cả trên cả tên biến và giá trị, nó tương ứng với key và value của mảng tham số.</p>
+<p><code>contains()</code> cũng tương tự như <code>subset()</code> nhưng sẽ không quan tâm đến tên của key của mảng.
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span>\Mockery<span style="color: #666666">::</span><span style="color: #388038">contains</span><span style="color: #888888">(</span>value1<span style="color: #888888">,</span> value2<span style="color: #888888">));</span>
+</code></pre></div>
+<code>hasKey()</code> khớp với đối số là một mảng có chứa key name đã cho
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span>\Mockery<span style="color: #666666">::</span><span style="color: #388038">hasKey</span><span style="color: #888888">(</span><span style="color: #388038">key</span><span style="color: #888888">));</span>
+</code></pre></div>
+<code>hasValue()</code> khớp với đối số là một mảng có chứa value đã cho
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyClass&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span>\Mockery<span style="color: #666666">::</span><span style="color: #388038">hasValue</span><span style="color: #888888">(</span>value<span style="color: #888888">));</span>
+</code></pre></div></p>
+<h2 id="spies">Spies<a class="headerlink" href="#spies" title="Permanent link">&para;</a></h2>
+<p>Spies là một loại test double, tuy nhiên khác với mock ở chỗ nó ghi lại tất cả tương tác giữa nó với hệ thống test (SUT) và cho phép đưa ra các assertion với những tương tác đó sau khi SUT chạy.</p>
+<p>Tạo một spy giúp bạn không cần phải thiết lập việc call tất cả các phương thức như mock. Bạn chỉ cần tạo assertion cho việc call một vài phương thức mà bạn quan tâm đến, bởi lẽ không phải phương thức nào cũng ảnh hưởng cho một test case nhất định.</p>
+<p>Trong khi với <code>mock</code> thì hầu như phải áp dụng style <code>Arrange-Act-Assert</code> vì chúng phải khai báo <code>expect</code> những hàm được gọi cùng kết quả trả về trước khi gọi hàm thực thi trong test, cuối cùng mới là assert xem những expect đó đã được đáp ứng.
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #888888; font-style: italic">// arrange</span>
+<span style="color: #b04040">$mock</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">mock</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyDependency&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$sut</span> <span style="color: #666666">=</span> <span style="color: #2838b0">new</span> MyClass<span style="color: #888888">(</span><span style="color: #b04040">$mock</span><span style="color: #888888">);</span>
+
+<span style="color: #888888; font-style: italic">// expect</span>
+<span style="color: #b04040">$mock</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldReceive</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">once</span><span style="color: #888888">()</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;bar&#39;</span><span style="color: #888888">);</span>
+
+<span style="color: #888888; font-style: italic">// act</span>
+<span style="color: #b04040">$sut</span><span style="color: #666666">-&gt;</span><span style="color: #388038">callFoo</span><span style="color: #888888">();</span>
+
+<span style="color: #888888; font-style: italic">// assert</span>
+\Mockery<span style="color: #666666">::</span><span style="color: #388038">close</span><span style="color: #888888">();</span>
+</code></pre></div>
+Còn <code>spies</code> có thể áp dụng linh hoạt cả style <code>Arrange-Act-Assert</code> hoặc <code>Given-When-Then</code>. Nó cho phép bỏ qua expect và chuyển assertion đến sau act ở SUT, giúp cho test case dễ đọc hiểu hơn.</p>
+<p><div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #888888; font-style: italic">// arrange</span>
+<span style="color: #b04040">$spy</span> <span style="color: #666666">=</span> \Mockery<span style="color: #666666">::</span><span style="color: #388038">spy</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;MyDependency&#39;</span><span style="color: #888888">);</span>
+<span style="color: #b04040">$sut</span> <span style="color: #666666">=</span> <span style="color: #2838b0">new</span> MyClass<span style="color: #888888">(</span><span style="color: #b04040">$spy</span><span style="color: #888888">);</span>
+
+<span style="color: #888888; font-style: italic">// act</span>
+<span style="color: #b04040">$sut</span><span style="color: #666666">-&gt;</span><span style="color: #388038">callFoo</span><span style="color: #888888">();</span>
+
+<span style="color: #888888; font-style: italic">// assert</span>
+<span style="color: #b04040">$spy</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldHaveReceived</span><span style="color: #888888">()</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">foo</span><span style="color: #888888">()</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;bar&#39;</span><span style="color: #888888">);</span>
+</code></pre></div>
+<code>spies</code> ít hạn chế hơn so với <code>mock</code>, Nó giúp nêu bật mục đích test và hạn chế lộ cấu trúc của SUT.</p>
+<p>Tuy nhiên, hạn chế của <code>spies</code> là debug. Khi mock bị gọi ngoài expect, nó lập tức throw exception, nó gần như được coi là một trình debug. Với spies nếu có một hàm call sai, nó sẽ không thể có bối cảnh thời gian lập tức như <code>mock</code>, nó chỉ đơn giản khẳng định một hàm được gọi.</p>
+<p>Cuối cùng, spy không thể định nghĩa giá trị return của hàm, chỉ có mock mới làm được điều đó.</p>
+<h3 id="một-số-hàm-thông-dụng-của-spies">Một số hàm thông dụng của spies<a class="headerlink" href="#một-số-hàm-thông-dụng-của-spies" title="Permanent link">&para;</a></h3>
+<p>Để verify một phương thức được gọi trong spy, sử dụng <code>shouldHaveReceived()</code>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$spy</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldHaveReceived</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">);</span>
+</code></pre></div>
+Để verify một phương thức không được gọi, sử dụng <code>shouldNotHaveReceived()</code>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$spy</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldNotHaveReceived</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">);</span>
+</code></pre></div>
+Để đối sánh tham số được truyền vào một hàm với <code>spies</code> ta có thể dùng hai cách: sử dùng hàm <code>with</code> hoặc sử dụng một mảng gồm các tham số cần cần đối sánh để truyền vào hàm:
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$spy</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldHaveReceived</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;bar&#39;</span><span style="color: #888888">);</span>
+
+<span style="color: #888888; font-style: italic">// Or</span>
+
+<span style="color: #b04040">$spy</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldHaveReceived</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">,</span> <span style="color: #888888">[</span><span style="color: #b83838">&#39;bar&#39;</span><span style="color: #888888">]);</span>
+</code></pre></div>
+Lưu ý cách 1 không thể dùng cho <code>shouldNotHaveReceived()</code>. Nếu muốn sử dụng với một hàm không được gọi bạn cần phải sử dụng cách 2:
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$spy</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldNotHaveReceived</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">,</span> <span style="color: #888888">[</span><span style="color: #b83838">&#39;bar&#39;</span><span style="color: #888888">]);</span>
+</code></pre></div>
+Để xác nhận số lần hàm được gọi
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$spy</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldHaveReceived</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;foo&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">with</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;bar&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">twice</span><span style="color: #888888">();</span>
+</code></pre></div></p>
+<h3 id="thay-thế-cú-pháp-shouldreceive">Thay thế cú pháp <code>shouldReceive</code><a class="headerlink" href="#thay-thế-cú-pháp-shouldreceive" title="Permanent link">&para;</a></h3>
+<p>Kể từ Mockery 1.0.0, hỗ trợ gọi các phương thức tương tự như các phương thức của PHP mà không cần đối số dạng <code>String</code> trong <code>should</code> method</p>
+<p>Với spies nó mới chỉ được áp dụng cho <code>shouldHaveReceived()</code>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$spy</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldHaveReceived</span><span style="color: #888888">()</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">foo</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;bar&#39;</span><span style="color: #888888">);</span>
+
+<span style="color: #888888; font-style: italic">// Expect number of call</span>
+<span style="color: #b04040">$spy</span><span style="color: #666666">-&gt;</span><span style="color: #388038">shouldHaveReceived</span><span style="color: #888888">()</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">foo</span><span style="color: #888888">(</span><span style="color: #b83838">&#39;bar&#39;</span><span style="color: #888888">)</span>
+    <span style="color: #666666">-&gt;</span><span style="color: #388038">twice</span><span style="color: #888888">();</span>
+</code></pre></div>
+Vì một số hạn chế cú pháp này chưa được áp dụng cho phương thức <code>shouldNotHaveReceived()</code>.</p>
+<h2 id="xem-thêm">Xem thêm<a class="headerlink" href="#xem-thêm" title="Permanent link">&para;</a></h2>
+<p><a href="http://docs.mockery.io/en/latest/">http://docs.mockery.io/en/latest/</a></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../../laravel/10-others/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Others
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../mutation-testing/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Mutation Testing
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["header.autohide", "navigation.instant"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.fb4a9340.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a1c7c35e.min.js"></script>
+      
+    
+  </body>
+</html>

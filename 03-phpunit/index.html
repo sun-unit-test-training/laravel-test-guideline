@@ -9,8 +9,10 @@
       
       
       
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
+        <link rel="canonical" href="https://sun-unit-test-training.github.io/php-testing-guideline/03-phpunit/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.6">
     
     
       
@@ -18,10 +20,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.6910b76c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.2c0c5eaf.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.196e0c26.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.7fa14f5b.min.css">
         
       
     
@@ -29,9 +31,9 @@
     
       
         
-        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
       
     
     
@@ -51,6 +53,7 @@
     <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
       
   
+    
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
@@ -66,36 +69,39 @@
       
     </div>
     
-      
-
-<header class="md-header" data-md-component="header">
-  <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href=".." title="PHP Testing Guidelines" class="md-header-nav__button md-logo" aria-label="PHP Testing Guidelines">
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="PHP Testing Guidelines" class="md-header__button md-logo" aria-label="PHP Testing Guidelines" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
-    <label class="md-header-nav__button md-icon" for="__drawer">
+    <label class="md-header__button md-icon" for="__drawer">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
     </label>
-    <div class="md-header-nav__title" data-md-component="header-title">
-      
-        <div class="md-header-nav__ellipsis">
-          <span class="md-header-nav__topic md-ellipsis">
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
             PHP Testing Guidelines
           </span>
-          <span class="md-header-nav__topic md-ellipsis">
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
             
               PHPUnit
             
           </span>
         </div>
+      </div>
+    </div>
+    <div class="md-header__options">
       
     </div>
     
-      <label class="md-header-nav__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
       </label>
       
 <div class="md-search" data-md-component="search" role="dialog">
@@ -104,10 +110,10 @@
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
       <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
       </label>
-      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
       </button>
     </form>
@@ -125,12 +131,12 @@
 </div>
     
     
-      <div class="md-header-nav__source">
+      <div class="md-header__source">
         
-<a href="https://github.com/sun-unit-test-training/php-testing-guideline/" title="Go to repository" class="md-source">
+<a href="https://github.com/sun-unit-test-training/php-testing-guideline" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -150,17 +156,19 @@
         <div class="md-main__inner md-grid">
           
             
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
 
+
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="PHP Testing Guidelines" class="md-nav__button md-logo" aria-label="PHP Testing Guidelines">
+    <a href=".." title="PHP Testing Guidelines" class="md-nav__button md-logo" aria-label="PHP Testing Guidelines" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
     PHP Testing Guidelines
@@ -168,10 +176,10 @@
   
     <div class="md-nav__source">
       
-<a href="https://github.com/sun-unit-test-training/php-testing-guideline/" title="Go to repository" class="md-source">
+<a href="https://github.com/sun-unit-test-training/php-testing-guideline" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -185,36 +193,15 @@
       
       
 
-
-  <li class="md-nav__item">
-    <a href=".." class="md-nav__link">
-      Giới thiệu
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../01-why/" class="md-nav__link">
-      Viết test để làm gì?
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../02-testcase/" class="md-nav__link">
-      Cơ bản về test case
-    </a>
-  </li>
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Giới thiệu
+      </a>
+    </li>
+  
 
     
       
@@ -222,25 +209,57 @@
       
 
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-why/" class="md-nav__link">
+        Viết test để làm gì?
+      </a>
+    </li>
+  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
       
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-testcase/" class="md-nav__link">
+        Cơ bản về test case
+      </a>
+    </li>
+  
+
     
+      
+      
+      
+
+  
+  
     
-      <label class="md-nav__link md-nav__link--active" for="__toc">
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          PHPUnit
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         PHPUnit
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
-      PHPUnit
-    </a>
-    
+      </a>
       
+        
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -251,24 +270,24 @@
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-    <ul class="md-nav__list" data-md-scrollfix>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#cai-at" class="md-nav__link">
+  <a href="#cài-đặt" class="md-nav__link">
     Cài đặt
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#cau-hinh" class="md-nav__link">
+  <a href="#cấu-hình" class="md-nav__link">
     Cấu hình
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#chay-test" class="md-nav__link">
+  <a href="#chạy-test" class="md-nav__link">
     Chạy test
   </a>
   
@@ -276,21 +295,21 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#chay-toan-bo-test-case" class="md-nav__link">
+  <a href="#chạy-toàn-bộ-test-case" class="md-nav__link">
     Chạy toàn bộ test case
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#chay-tung-test-suite" class="md-nav__link">
+  <a href="#chạy-từng-test-suite" class="md-nav__link">
     Chạy từng test suite
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#chay-tung-file" class="md-nav__link">
+  <a href="#chạy-từng-file" class="md-nav__link">
     Chạy từng file
   </a>
   
@@ -359,225 +378,282 @@
     </ul>
   
 </nav>
-    
-  </li>
+      
+    </li>
+  
 
     
       
       
       
 
-
-  <li class="md-nav__item">
-    <a href="../04-code-coverage/" class="md-nav__link">
-      Code Coverage
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../05-test-doubles-and-di/" class="md-nav__link">
-      Test Doubles và DI
-    </a>
-  </li>
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-code-coverage/" class="md-nav__link">
+        Code Coverage
+      </a>
+    </li>
+  
 
     
       
       
       
 
-
-  <li class="md-nav__item">
-    <a href="../06-mutation-testing/" class="md-nav__link">
-      Mutation Testing
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../07-checklist/" class="md-nav__link">
-      Checklist
-    </a>
-  </li>
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-test-doubles-and-di/" class="md-nav__link">
+        Test Doubles và DI
+      </a>
+    </li>
+  
 
     
       
       
       
 
-
-  <li class="md-nav__item">
-    <a href="../08-tdd/" class="md-nav__link">
-      TDD
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../09-references/" class="md-nav__link">
-      Tài liệu khác
-    </a>
-  </li>
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-checklist/" class="md-nav__link">
+        Checklist
+      </a>
+    </li>
+  
 
     
       
       
       
 
-
-  <li class="md-nav__item md-nav__item--nested">
+  
+  
+  
     
-    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" >
-    <label class="md-nav__link" for="nav-11">
-      Laravel
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Laravel" data-md-level="1">
-      <label class="md-nav__title" for="nav-11">
-        <span class="md-nav__icon md-icon"></span>
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      <label class="md-nav__link" for="__nav_8">
         Laravel
+        <span class="md-nav__icon md-icon"></span>
       </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
+      <nav class="md-nav" aria-label="Laravel" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Laravel
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../laravel/01-convention/" class="md-nav__link">
+        Convention
+      </a>
+    </li>
+  
+
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../laravel/02-mocking/" class="md-nav__link">
+        Mocking
+      </a>
+    </li>
+  
+
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../laravel/03-controller/" class="md-nav__link">
+        Controller
+      </a>
+    </li>
+  
 
-
-  <li class="md-nav__item">
-    <a href="../laravel/01-convention/" class="md-nav__link">
-      Convention
-    </a>
-  </li>
-
-        
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../laravel/04-model/" class="md-nav__link">
+        Model
+      </a>
+    </li>
+  
+
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../laravel/05-repository-service/" class="md-nav__link">
+        Repository / Service
+      </a>
+    </li>
+  
+
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../laravel/06-middleware/" class="md-nav__link">
+        Middleware
+      </a>
+    </li>
+  
 
-
-  <li class="md-nav__item">
-    <a href="../laravel/02-mocking/" class="md-nav__link">
-      Mocking
-    </a>
-  </li>
-
-        
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../laravel/07-mail/" class="md-nav__link">
+        Mail
+      </a>
+    </li>
+  
+
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../laravel/08-command/" class="md-nav__link">
+        Command
+      </a>
+    </li>
+  
+
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../laravel/09-queue/" class="md-nav__link">
+        Queue
+      </a>
+    </li>
+  
 
-
-  <li class="md-nav__item">
-    <a href="../laravel/03-controller/" class="md-nav__link">
-      Controller
-    </a>
-  </li>
-
-        
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../laravel/10-others/" class="md-nav__link">
+        Others
+      </a>
+    </li>
+  
+
           
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      <label class="md-nav__link" for="__nav_9">
+        Read more
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Read more" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Read more
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../read-more/mockery/" class="md-nav__link">
+        Mockery
+      </a>
+    </li>
+  
 
-
-  <li class="md-nav__item">
-    <a href="../laravel/04-model/" class="md-nav__link">
-      Model
-    </a>
-  </li>
-
-        
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../read-more/mutation-testing/" class="md-nav__link">
+        Mutation Testing
+      </a>
+    </li>
+  
+
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../read-more/references/" class="md-nav__link">
+        Tài liệu khác
+      </a>
+    </li>
+  
+
           
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../read-more/tdd/" class="md-nav__link">
+        TDD
+      </a>
+    </li>
+  
 
-
-  <li class="md-nav__item">
-    <a href="../laravel/05-repository-service/" class="md-nav__link">
-      Repository / Service
-    </a>
-  </li>
-
-        
           
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../laravel/06-middleware/" class="md-nav__link">
-      Middleware
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../laravel/07-mail/" class="md-nav__link">
-      Mail
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../laravel/08-command/" class="md-nav__link">
-      Command
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../laravel/09-queue/" class="md-nav__link">
-      Queue
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../laravel/10-others/" class="md-nav__link">
-      Others
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
+        </ul>
+      </nav>
+    </li>
+  
 
     
   </ul>
@@ -587,7 +663,8 @@
               </div>
             
             
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
@@ -601,24 +678,24 @@
       <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-    <ul class="md-nav__list" data-md-scrollfix>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#cai-at" class="md-nav__link">
+  <a href="#cài-đặt" class="md-nav__link">
     Cài đặt
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#cau-hinh" class="md-nav__link">
+  <a href="#cấu-hình" class="md-nav__link">
     Cấu hình
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#chay-test" class="md-nav__link">
+  <a href="#chạy-test" class="md-nav__link">
     Chạy test
   </a>
   
@@ -626,21 +703,21 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#chay-toan-bo-test-case" class="md-nav__link">
+  <a href="#chạy-toàn-bộ-test-case" class="md-nav__link">
     Chạy toàn bộ test case
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#chay-tung-test-suite" class="md-nav__link">
+  <a href="#chạy-từng-test-suite" class="md-nav__link">
     Chạy từng test suite
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#chay-tung-file" class="md-nav__link">
+  <a href="#chạy-từng-file" class="md-nav__link">
     Chạy từng file
   </a>
   
@@ -714,26 +791,22 @@
               </div>
             
           
-          <div class="md-content">
+          <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/sun-unit-test-training/php-testing-guideline/edit/master/docs/03-phpunit.md" title="Edit this page" class="md-content__button md-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
-                  </a>
-                
                 
                 <h1 id="phpunit">PHPUnit<a class="headerlink" href="#phpunit" title="Permanent link">&para;</a></h1>
-<h2 id="cai-at">Cài đặt<a class="headerlink" href="#cai-at" title="Permanent link">&para;</a></h2>
+<h2 id="cài-đặt">Cài đặt<a class="headerlink" href="#cài-đặt" title="Permanent link">&para;</a></h2>
 <p>Cài đặt theo từng project:</p>
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code>composer require --dev phpunit/phpunit
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code>composer require --dev phpunit/phpunit
 </code></pre></div>
 <p>Khi đó ta có tool:</p>
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code>./vendor/bin/phpunit
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code>./vendor/bin/phpunit
 </code></pre></div>
-<h2 id="cau-hinh">Cấu hình<a class="headerlink" href="#cau-hinh" title="Permanent link">&para;</a></h2>
+<h2 id="cấu-hình">Cấu hình<a class="headerlink" href="#cấu-hình" title="Permanent link">&para;</a></h2>
 <p>File cấu hình <code>phpunit.xml</code> (thường đã có sẵn trong project Laravel):</p>
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code><span style="color: #289870">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #289870">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 <span style="color: #2838b0">&lt;phpunit</span> <span style="color: #388038">bootstrap=</span><span style="color: #b83838">&quot;vendor/autoload.php&quot;</span>
          <span style="color: #388038">colors=</span><span style="color: #b83838">&quot;true&quot;</span>
          <span style="color: #388038">convertErrorsToExceptions=</span><span style="color: #b83838">&quot;true&quot;</span>
@@ -763,7 +836,7 @@
 <span style="color: #2838b0">&lt;/phpunit&gt;</span>
 </code></pre></div>
 <p>Environment variables có thể khai báo trực tiếp trong file <code>phpunit.xml</code> hoặc sử dụng file <code>env.testing</code> (Laravel):</p>
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code><span style="color: #388038">APP_NAME</span><span style="color: #666666">=</span><span style="color: #b83838">&quot;App Test&quot;</span>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #388038">APP_NAME</span><span style="color: #666666">=</span><span style="color: #b83838">&quot;App Test&quot;</span>
 <span style="color: #388038">APP_KEY</span><span style="color: #666666">=</span><span style="color: #b83838">...</span>
 <span style="color: #388038">APP_DEBUG</span><span style="color: #666666">=</span><span style="color: #b83838">false</span>
 <span style="color: #388038">APP_URL</span><span style="color: #666666">=</span><span style="color: #b83838">http://localhost</span>
@@ -775,30 +848,30 @@
 <span style="color: #388038">DB_USERNAME</span><span style="color: #666666">=</span><span style="color: #b83838">db_test</span>
 <span style="color: #388038">DB_PASSWORD</span><span style="color: #666666">=</span><span style="color: #b83838">secret</span>
 </code></pre></div>
-<h2 id="chay-test">Chạy test<a class="headerlink" href="#chay-test" title="Permanent link">&para;</a></h2>
-<h3 id="chay-toan-bo-test-case">Chạy toàn bộ test case<a class="headerlink" href="#chay-toan-bo-test-case" title="Permanent link">&para;</a></h3>
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code>./vendor/bin/phpunit
+<h2 id="chạy-test">Chạy test<a class="headerlink" href="#chạy-test" title="Permanent link">&para;</a></h2>
+<h3 id="chạy-toàn-bộ-test-case">Chạy toàn bộ test case<a class="headerlink" href="#chạy-toàn-bộ-test-case" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code>./vendor/bin/phpunit
 </code></pre></div>
-<h3 id="chay-tung-test-suite">Chạy từng test suite<a class="headerlink" href="#chay-tung-test-suite" title="Permanent link">&para;</a></h3>
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code>./vendor/bin/phpunit --testsuite<span style="color: #666666">=</span>Unit
+<h3 id="chạy-từng-test-suite">Chạy từng test suite<a class="headerlink" href="#chạy-từng-test-suite" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code>./vendor/bin/phpunit --testsuite<span style="color: #666666">=</span>Unit
 ./vendor/bin/phpunit --testsuite<span style="color: #666666">=</span>Integration
 </code></pre></div>
-<h3 id="chay-tung-file">Chạy từng file<a class="headerlink" href="#chay-tung-file" title="Permanent link">&para;</a></h3>
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code>./vendor/bin/phpunit tests/Unit/ProductServiceTest.php
+<h3 id="chạy-từng-file">Chạy từng file<a class="headerlink" href="#chạy-từng-file" title="Permanent link">&para;</a></h3>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code>./vendor/bin/phpunit tests/Unit/ProductServiceTest.php
 </code></pre></div>
 <h3 id="filter-test-case">Filter test case<a class="headerlink" href="#filter-test-case" title="Permanent link">&para;</a></h3>
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code>./vendor/bin/phpunit --filter <span style="color: #b83838">&#39;TestNamespace\\TestCaseClass::testMethod&#39;</span>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code>./vendor/bin/phpunit --filter <span style="color: #b83838">&#39;TestNamespace\\TestCaseClass::testMethod&#39;</span>
 ./vendor/bin/phpunit --filter <span style="color: #b83838">&#39;TestNamespace\\TestCaseClass&#39;</span>
 ./vendor/bin/phpunit --filter TestNamespace
 ./vendor/bin/phpunit --filter TestCaseClass
 ./vendor/bin/phpunit --filter testMethod
 </code></pre></div>
 <h3 id="format-output">Format output<a class="headerlink" href="#format-output" title="Permanent link">&para;</a></h3>
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code>./vendor/bin/phpunit --testdox
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code>./vendor/bin/phpunit --testdox
 </code></pre></div>
 <p><img alt="" src="../assets/images/phpunit.png" /></p>
 <h2 id="example-test">Example test<a class="headerlink" href="#example-test" title="Permanent link">&para;</a></h2>
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code><span style="color: #666666">&lt;?</span>php
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #666666">&lt;?</span>php
 <span style="color: #888888; font-style: italic">// tests/Unit/CalculatorTest.php</span>
 <span style="color: #2838b0">namespace</span> Tests\Unit<span style="color: #888888">;</span>
 
@@ -839,7 +912,7 @@
 <li><code>tearDownAfterClass()</code>: Chạy sau khi kết thúc class test</li>
 </ul>
 <p>Ví dụ:</p>
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code><span style="color: #2838b0">class</span> <span style="color: #287088">ExampleTest</span> <span style="color: #2838b0">extends</span> TestCase
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #2838b0">class</span> <span style="color: #287088">ExampleTest</span> <span style="color: #2838b0">extends</span> TestCase
 <span style="color: #888888">{</span>
     <span style="color: #2838b0">protected</span> <span style="color: #2838b0">static</span> <span style="color: #b04040">$db</span><span style="color: #888888">;</span>
 
@@ -893,7 +966,7 @@
 <p>(8) <code>ExampleTest::tearDownAfterClass()</code></p>
 <hr />
 <h2 id="assertion">Assertion<a class="headerlink" href="#assertion" title="Permanent link">&para;</a></h2>
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code><span style="color: #666666">**</span>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #666666">**</span>
  <span style="color: #666666">*</span> Verify <span style="color: #b04040">$actualValue</span> equals to <span style="color: #b04040">$expectedValue</span><span style="color: #666666">?</span>
  <span style="color: #666666">*</span> Nếu không đúng<span style="color: #888888">,</span> thì show ra message
  <span style="color: #666666">*</span> Nếu không truyền vào message thì PHPUnit sẽ tự động generate<span style="color: #666666">:</span>
@@ -911,7 +984,7 @@
 <li><code>assertInstanceOf()</code> &lt;&gt; <code>assertNotInstanceOf()</code>: Đối tượng thuộc class</li>
 <li><code>assertCount()</code></li>
 <li><code>expectException()</code>: Expect sẽ có Exception khi gọi chạy unit, chú ý phải gọi trước khi gọi method / function
-    <div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code><span style="color: #2838b0">public</span> <span style="color: #2838b0">function</span> <span style="color: #785840">test_foo</span><span style="color: #888888">()</span>
+    <div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #2838b0">public</span> <span style="color: #2838b0">function</span> <span style="color: #785840">test_foo</span><span style="color: #888888">()</span>
 <span style="color: #888888">{</span>
     <span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">expectException</span><span style="color: #888888">(</span>InvalidArgument<span style="color: #666666">::</span><span style="color: #388038">class</span><span style="color: #888888">);</span>
     <span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">classUnderTest</span><span style="color: #666666">-&gt;</span><span style="color: #388038">execute</span><span style="color: #888888">();</span>
@@ -925,7 +998,7 @@
 <li>Nếu assert failed thì message sinh ra cũng dễ hiểu hơn</li>
 <li>Signature của các method assert thường có các tham số theo thứ tự là expected value (giá trị mong muốn), actual value (giá trị thực tế khi chạy unit), message (message thông báo nếu fail) nên cần truyền theo thứ tự để PHPUnit có thể generate ra message báo lỗi chính xác</li>
 </ul>
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code><span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">assertEquals</span><span style="color: #888888">(</span><span style="color: #b04040">$expected</span><span style="color: #888888">,</span> <span style="color: #b04040">$actual</span><span style="color: #888888">);</span>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">assertEquals</span><span style="color: #888888">(</span><span style="color: #b04040">$expected</span><span style="color: #888888">,</span> <span style="color: #b04040">$actual</span><span style="color: #888888">);</span>
 <span style="color: #888888; font-style: italic">// =&gt; Failed asserting that $actual matches expected $expected.</span>
 <span style="color: #b04040">$this</span><span style="color: #666666">-&gt;</span><span style="color: #388038">assertTrue</span><span style="color: #888888">(</span><span style="color: #b04040">$expected</span> <span style="color: #666666">==</span> <span style="color: #b04040">$actual</span><span style="color: #888888">);</span>
 <span style="color: #888888; font-style: italic">// =&gt; Failed asserting that false is true??</span>
@@ -944,7 +1017,7 @@
 </code></pre></div>
 <h2 id="data-provider">Data provider<a class="headerlink" href="#data-provider" title="Permanent link">&para;</a></h2>
 <p>Sử dụng <code>@dataProvider</code> cho những trường hợp chỉ khác nhau input, output</p>
-<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%; margin: 0;"><span></span><code><span style="color: #b85820; font-style: italic">/**</span>
+<div class="highlight" style="background: #ffffff"><pre style="line-height: 125%;"><span></span><code><span style="color: #b85820; font-style: italic">/**</span>
 <span style="color: #b85820; font-style: italic"> * @dataProvider provider_test_foo</span>
 <span style="color: #b85820; font-style: italic"> */</span>
 <span style="color: #2838b0">public</span> <span style="color: #2838b0">function</span> <span style="color: #785840">test_foo</span><span style="color: #888888">(</span><span style="color: #b04040">$variableOne</span><span style="color: #888888">,</span> <span style="color: #b04040">$variableTwo</span><span style="color: #888888">)</span>
@@ -976,40 +1049,38 @@
         
 <footer class="md-footer">
   
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
-        
-          <a href="../02-testcase/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../02-testcase/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Cơ bản về test case
             </div>
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Cơ bản về test case
-              </div>
+          </div>
+        </a>
+      
+      
+        <a href="../04-code-coverage/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Code Coverage
             </div>
-          </a>
-        
-        
-          <a href="../04-code-coverage/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Code Coverage
-              </div>
-            </div>
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -1019,6 +1090,7 @@
         <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
           Material for MkDocs
         </a>
+        
       </div>
       
     </div>
@@ -1026,19 +1098,13 @@
 </footer>
       
     </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["header.autohide", "navigation.instant"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.fb4a9340.min.js", "version": null}</script>
     
-      <script src="../assets/javascripts/vendor.fd16492e.min.js"></script>
-      <script src="../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
-      
-      <script>
-        app = initialize({
-          base: "..",
-          features: [],
-          search: Object.assign({
-            worker: "../assets/javascripts/worker/search.4ac00218.min.js"
-          }, typeof search !== "undefined" && search)
-        })
-      </script>
+    
+      <script src="../assets/javascripts/bundle.a1c7c35e.min.js"></script>
       
     
   </body>
